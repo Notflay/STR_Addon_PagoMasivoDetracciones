@@ -1,0 +1,82 @@
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Imgs\logo_empresa_1.png
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Menus\Menu.xml
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Localizacion\frmCtaDestino.srf
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Localizacion\frmDetracciones.srf
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Localizacion\frmPagos.srf
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Localizacion\frmParam1.srf
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Imgs\boton_archivo_1.png
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Imgs\boton_procesar_1.png
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\BPP.exe.config
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\BPP.exe
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\BPP.pdb
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.csproj.AssemblyReference.cache
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\Interop.SAPbobsCOM.dll
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\Interop.SAPbouiCOM.dll
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.csproj.ResolveComReference.cache
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.Properties.Resources.resources
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.csproj.GenerateResource.cache
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.csproj.CoreCompileInputs.cache
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.exe
+C:\Users\administrador\Source\Repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.pdb
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\bin\x86\Debug\Resources\Imgs\logo_empresa_1.png
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\bin\x86\Debug\Menus\Menu.xml
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\bin\x86\Debug\Resources\Localizacion\frmCtaDestino.srf
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\bin\x86\Debug\Resources\Localizacion\frmDetracciones.srf
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\bin\x86\Debug\Resources\Localizacion\frmPagos.srf
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\bin\x86\Debug\Resources\Localizacion\frmParam1.srf
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\bin\x86\Debug\Resources\Imgs\boton_archivo_1.png
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\bin\x86\Debug\Resources\Imgs\boton_procesar_1.png
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\bin\x86\Debug\BPP.dll.config
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\bin\x86\Debug\BPP.dll
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\bin\x86\Debug\BPP.pdb
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\obj\x86\Debug\BPP.csproj.AssemblyReference.cache
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\obj\x86\Debug\Interop.SAPbobsCOM.dll
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\obj\x86\Debug\Interop.SAPbouiCOM.dll
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\obj\x86\Debug\BPP.csproj.ResolveComReference.cache
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\obj\x86\Debug\BPP.Properties.Resources.resources
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\obj\x86\Debug\BPP.csproj.GenerateResource.cache
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\obj\x86\Debug\BPP.csproj.CoreCompileInputs.cache
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\obj\x86\Debug\BPP.dll
+D:\Chamba Backend\Addon Pl us\Pagos Masivo\BPP\BPP\obj\x86\Debug\BPP.pdb
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Imgs\logo_empresa_1.png
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Menus\Menu.xml
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Localizacion\frmCtaDestino.srf
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Localizacion\frmDetracciones.srf
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Localizacion\frmPagos.srf
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Localizacion\frmParam1.srf
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Imgs\boton_archivo_1.png
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\Resources\Imgs\boton_procesar_1.png
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\BPP.dll.config
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\BPP.dll
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\BPP.pdb
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Debug\log4net.dll
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.csproj.AssemblyReference.cache
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\Interop.SAPbobsCOM.dll
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\Interop.SAPbouiCOM.dll
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.csproj.ResolveComReference.cache
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.Properties.Resources.resources
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.csproj.GenerateResource.cache
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.csproj.CopyComplete
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.dll
+C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\BPP.pdb
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Imgs\logo_empresa_1.png
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Menus\Menu.xml
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Localizacion\frmCtaDestino.srf
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Localizacion\frmDetracciones.srf
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Localizacion\frmPagos.srf
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Localizacion\frmParam1.srf
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Imgs\boton_archivo_1.png
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Imgs\boton_procesar_1.png
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\BPP.dll.config
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\BPP.dll
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\BPP.pdb
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x86\Debug\BPP.csproj.AssemblyReference.cache
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x86\Debug\Interop.SAPbobsCOM.dll
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x86\Debug\Interop.SAPbouiCOM.dll
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x86\Debug\BPP.csproj.ResolveComReference.cache
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x86\Debug\BPP.Properties.Resources.resources
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x86\Debug\BPP.csproj.GenerateResource.cache
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x86\Debug\BPP.csproj.CoreCompileInputs.cache
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x86\Debug\BPP.dll
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x86\Debug\BPP.pdb

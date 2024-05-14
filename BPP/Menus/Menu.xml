@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+	<Menus>
+		<action type="add">
+			<Menu Checked="0" Enabled="1" FatherUID="MNULOCALI" Position="6" String="Configuración Pagos Masivos" Type="1" UniqueID="mnuParam" />
+			<Menu Checked="0" Enabled="1" FatherUID="MNULOCALI" Position="8" String="Pagos Masivos de Proveedores" Type="1" UniqueID="mnuPagos" />
+			<Menu Checked="0" Enabled="1" FatherUID="MNULOCALI" Position="9" String="Cuenta Destino - Detalle" Type="1" UniqueID="mnuCtaDest" />
+		</action>
+	</Menus>
+</Application>
+
+
+
+
+
+
+
