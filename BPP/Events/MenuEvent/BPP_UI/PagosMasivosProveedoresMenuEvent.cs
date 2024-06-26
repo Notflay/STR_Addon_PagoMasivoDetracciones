@@ -17,7 +17,7 @@ namespace BPP
             BubbleEvent = true;
 
             Recordset oRecordSet = (SAPbobsCOM.Recordset)SAPMain.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            this.oForm = SAPMain.SBO_Application.Forms.Item("UDO_FT_BPP_PAGM2");
+            this.oForm = SAPMain.SBO_Application.Forms.Item("UDO_FT_BPP_PAGM4");
             oForm.Select();
             try
             {
@@ -83,6 +83,8 @@ namespace BPP
                                     SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_Commit);
                                     oRecordSet = (Recordset)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
                                     query = string.Format("UPDATE \"@BPP_PAGM_CAB\" SET  U_BPP_ESTADO = 'Cancelado' WHERE \"DocEntry\"  = {0} ", oDocEntry);
+                                    Global.WriteToFile(query);
+
                                     oRecordSet.DoQuery(query);
 
                                     SAPMain.MensajeAdvertencia("Se cancelaron un total de  : " + cont + "Pagos ");

@@ -49,7 +49,7 @@ namespace BPP
                         cuentasDestinoMenuEvent.menuAction(ref pVal, out BubbleEvent);
                     }
 
-                    if (oForm.TypeEx == "UDO_FT_BPP_PAGM2")
+                    if (oForm.TypeEx == "UDO_FT_BPP_PAGM4")
                     {
 
                         PagosMasivosProveedoresMenuEvent pagosMasivosProveedoresMenuEvent = new PagosMasivosProveedoresMenuEvent();
@@ -75,7 +75,7 @@ namespace BPP
                         cuentasDestinoMenuEvent.menuAction(ref pVal, out BubbleEvent);
                     }
 
-                    if (oForm.TypeEx == "UDO_FT_BPP_PAGM2")
+                    if (oForm.TypeEx == "UDO_FT_BPP_PAGM4")
                     {
 
                         PagosMasivosProveedoresMenuEvent pagosMasivosProveedoresMenuEvent = new PagosMasivosProveedoresMenuEvent();

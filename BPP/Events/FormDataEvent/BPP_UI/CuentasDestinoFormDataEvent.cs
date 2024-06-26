@@ -27,49 +27,38 @@ namespace BPP
         {
             try
             {
-
-                Item oItem = oForm.Items.Item("txtEstado");
-                ComboBox oCombo = (ComboBox)oItem.Specific;
-
-                if (oCombo.Value == "Procesado")
+                Item item = oForm.Items.Item("txtEstado");
+                ComboBox comboBox = (ComboBox)(dynamic)item.Specific;
+                if (comboBox.Value == "Procesado")
                 {
-                    oItem = oForm.Items.Item("txtFeccre");
-                    oItem.Enabled = false;
-                    oItem = oForm.Items.Item("txtEstado");
-                    oItem.Enabled = false;
-                    oItem = oForm.Items.Item("21_U_E");
-                    oItem.Enabled = false;
-                    oItem = oForm.Items.Item("txtPeriodo");
-                    oItem.Enabled = false;
-                    oItem = oForm.Items.Item("btnConsult");
-                    oItem.Enabled = false;
-
-                    oItem = oForm.Items.Item("matDet1");
-                    oItem.Enabled = false;
-
-
+                    item = oForm.Items.Item("txtFeccre");
+                    item.Enabled = false;
+                    item = oForm.Items.Item("txtEstado");
+                    item.Enabled = false;
+                    item = oForm.Items.Item("21_U_E");
+                    item.Enabled = false;
+                    item = oForm.Items.Item("txtPeriodo");
+                    item.Enabled = false;
+                    item = oForm.Items.Item("btnConsult");
+                    item.Enabled = false;
+                    item = oForm.Items.Item("matDet1");
+                    item.Enabled = false;
                 }
                 else
                 {
-                    oItem = oForm.Items.Item("btnConsult");
-                    oItem.Enabled = true;
-
-                    oItem = oForm.Items.Item("txtFeccre");
-                    oItem.Enabled = true;
-                    oItem = oForm.Items.Item("txtEstado");
-                    oItem.Enabled = true;
-                    oItem = oForm.Items.Item("21_U_E");
-                    oItem.Enabled = true;
-                    oItem = oForm.Items.Item("txtPeriodo");
-                    oItem.Enabled = true;
-                    oItem = oForm.Items.Item("matDet1");
-                    oItem.Enabled = true;
-
-
+                    item = oForm.Items.Item("btnConsult");
+                    item.Enabled = true;
+                    item = oForm.Items.Item("txtFeccre");
+                    item.Enabled = true;
+                    item = oForm.Items.Item("txtEstado");
+                    item.Enabled = true;
+                    item = oForm.Items.Item("21_U_E");
+                    item.Enabled = true;
+                    item = oForm.Items.Item("txtPeriodo");
+                    item.Enabled = true;
+                    item = oForm.Items.Item("matDet1");
+                    item.Enabled = true;
                 }
-
-
-
             }
             catch (Exception ex)
             {

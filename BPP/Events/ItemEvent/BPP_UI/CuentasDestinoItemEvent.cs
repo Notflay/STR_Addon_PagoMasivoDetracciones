@@ -12,7 +12,7 @@ namespace BPP
     {
         private SAPbouiCOM.Form oForm;
 
-        public void itemAction(string FormUID, ref SAPbouiCOM.ItemEvent pVal, out bool BubbleEvent)
+        public void itemAction(string FormUID, ref ItemEvent pVal, out bool BubbleEvent)
         {
             BubbleEvent = true;
             oForm = SAPMain.SBO_Application.Forms.Item(pVal.FormUID);
@@ -20,405 +20,266 @@ namespace BPP
             {
                 if (!pVal.BeforeAction)
                 {
-                    string tipo = "";
-                    //logger.Debug(pVal.EventType.ToString());
+                    string text = "";
                     switch (pVal.EventType)
                     {
-
-
                         case BoEventTypes.et_ITEM_PRESSED:
-
-
-                            if (pVal.ItemUID == "btncom" && (pVal.FormMode == 1 || pVal.FormMode == 2 || pVal.FormMode == 3))
+                            if (pVal.ItemUID == "btncom" && pVal.FormMode != 1 && pVal.FormMode != 2 && pVal.FormMode != 3)
                             {
-
-
-                                //string TablaHana = "EW_PERDATA";
-                                //string matrixDetalle = "matDet1";
-
-                                //if (validardatostablausuario(TablaHana))
-                                //{
-                                //    removecolumns(matrixDetalle);
-                                //    createcolumns(matrixDetalle);
-
-                                //    cargardatostablausuario(matrixDetalle, TablaHana);
-                                //}
-                                //else
-                                //{
-                                //    removecolumns(matrixDetalle);
-                                //    createcolumns(matrixDetalle);
-                                //}
-
-                                //habilitarcamposanexos();
                             }
 
-
-
-
-
                             break;
-
-
-
-                        case BoEventTypes.et_COMBO_SELECT:
-
-                            //if ((pVal.ItemUID == "matDet1" || pVal.ItemUID == "matDet2") && (pVal.ColUID == "colTipocom") && (pVal.FormMode == 3 || pVal.FormMode == 2))
-                            //{
-                            //    validarCodigoRecurso(ref pVal, pVal.ItemUID);
-                            //}
-
-                            break;
-
-
-                            //case BoEventTypes.et_VALIDATE:
-
-
-                            //    if ((pVal.ItemUID == "matDet1" || pVal.ItemUID == "matDet2") && (pVal.ColUID == "colCodigo") && pVal.ItemChanged && (pVal.FormMode == 3 || pVal.FormMode == 2))
-                            //    {
-                            //        try
-                            //        {                                 
-                            //            buscardescripcion(ref pVal, pVal.ItemUID);
-                            //        }
-                            //        catch (Exception ex)
-                            //        {
-                            //            logger.Error(ex.Message, ex);
-                            //        }
-                            //    }
-
-                            //    if ((pVal.ItemUID == "matDet1"|| pVal.ItemUID == "matDet2") && (pVal.ColUID == "colMonto") && pVal.ItemChanged && (pVal.FormMode == 3 || pVal.FormMode == 2))
-                            //    {
-                            //        try
-                            //        {                                
-                            //            calculartotales(pVal.ItemUID);
-                            //        }
-                            //        catch (Exception ex)
-                            //        {
-                            //            logger.Error(ex.Message, ex);
-                            //        }
-                            //    }
-
-
-
-                            //    break;
-
-
-
-
                     }
+
+                    return;
                 }
 
-                else
+                switch (pVal.EventType)
                 {
-                    //logger.Debug(pVal.EventType.ToString());
-                    switch (pVal.EventType)
-                    {
-                        case BoEventTypes.et_KEY_DOWN:
-                            if ((pVal.ItemUID == "matDet1" || pVal.ItemUID == "matDet2") && (pVal.FormMode == 3 || pVal.FormMode == 1 || pVal.FormMode == 2))
-                            {
-                                //if (!validarbotonmatrix(pVal.ItemUID))
-                                //{
+                    case BoEventTypes.et_KEY_DOWN:
+                        if ((pVal.ItemUID == "matDet1" || pVal.ItemUID == "matDet2") && pVal.FormMode != 3 && pVal.FormMode != 1 && pVal.FormMode != 2)
+                        {
+                        }
 
-                                //    //SAPMain.SBO_Application.MessageBox("Debe cargar los períodos.", 1, "Ok", "");
+                        break;
+                    case BoEventTypes.et_ITEM_PRESSED:
+                        if (pVal.ItemUID == "btnConsult" && pVal.FormMode == 3)
+                        {
+                            cargarAsientos();
+                        }
 
-                                //    SAPMain.MensajeError("Debe cargar los períodos, de lo contrario no se guardaran sus datos.", true);
-                                //    BubbleEvent = false;
-                                //    return;
+                        if (pVal.ItemUID == "1" && pVal.FormMode == 3)
+                        {
+                            BubbleEvent = generarAsientos();
+                        }
 
-                                //}
-
-                            }
-                            break;
-
-                        case BoEventTypes.et_ITEM_PRESSED:
-
-
-                            if (pVal.ItemUID == "btnConsult" && pVal.FormMode == 3)
-                            {
-                                cargarAsientos();
-                            }
-
-
-                            if (pVal.ItemUID == "1" && pVal.FormMode == 3)
-                            {
-                                BubbleEvent = generarAsientos();
-                                //    return;
-
-                                //if (validarcolocarcodigo())
-                                //{
-
-                                //    SAPMain.SBO_Application.MessageBox("Debe colocar el codigo del proyecto.", 1, "Ok", "");
-                                //    BubbleEvent = false;
-                                //    return;
-                                //}
-                                //else
-                                //{
-                                //    string valorMoneda = validarmoneda();
-
-                                //    if (valorMoneda == "")
-                                //    {
-                                //        Forms.TCambioGUI tCambioGUI = new Forms.TCambioGUI();
-                                //        //oFormCambio = SAPMain.SBO_Application.Forms.Item("frmMoneda");
-                                //        //oFormCambio.EnableMenu("1292", true);
-                                //        //oFormCambio.EnableMenu("1293", false);
-                                //        cargarmoneda();
-                                //    }
-                                //    else
-                                //    {
-                                //        Forms.TCambioActualizarGUI tCambioActualizarGUI = new Forms.TCambioActualizarGUI();
-                                //        //oFormCambio2 = SAPMain.SBO_Application.Forms.Item("frmMoneda2");
-                                //        //oFormCambio2.EnableMenu("1292", true);
-                                //        //oFormCambio2.EnableMenu("1293", false);
-                                //        actualizarmoneda();
-                                //    }
-
-                                //}
-
-                            }
-
-                            break;
-                    }
-
-
+                        break;
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-
         }
-
         private void cargarAsientos()
         {
-            Matrix oMatrix = (Matrix)oForm.Items.Item("matDet1").Specific;
-            string periodo = oForm.Items.Item("txtPeriodo").Specific.Value;
-
+            Matrix matrix = (Matrix)(dynamic)oForm.Items.Item("matDet1").Specific;
+            string arg = ((dynamic)oForm.Items.Item("txtPeriodo").Specific).Value;
             try
             {
-                oForm.Freeze(true);
-
-                DBDataSource oDBDataSource = this.oForm.DataSources.DBDataSources.Item("@BPP_CTD_DET1");
-                oDBDataSource.Clear();
-
-                Recordset oRecordSet = (Recordset)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
-                string query = string.Empty;
-                if (SAPMain.oCompany.DbServerType == SAPbobsCOM.BoDataServerTypes.dst_HANADB)
+                oForm.Freeze(newVal: true);
+                DBDataSource dBDataSource = oForm.DataSources.DBDataSources.Item("@BPP_CTD_DET1");
+                dBDataSource.Clear();
+                Recordset recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+                string empty = string.Empty;
+                empty = ((SAPMain.oCompany.DbServerType != BoDataServerTypes.dst_HANADB) ? $"EXEC SP_BPP_CONSULTAR_DESTINOS '{arg}'  " : $" CALL \"SP_BPP_CONSULTAR_DESTINOS\" ('{arg}') ");
+                Global.WriteToFile(empty);
+                recordset.DoQuery(empty);
+                for (int i = 0; i < recordset.RecordCount; i++)
                 {
-                    query = string.Format(" CALL \"SP_BPP_CONSULTAR_DESTINOS\" ('{0}') ", periodo);
-                }
-                else
-                {
-                    query = string.Format("EXEC SP_BPP_CONSULTAR_DESTINOS '{0}'  ", periodo);
-                }
-                oRecordSet.DoQuery(query);
-                for (int i = 0; i < oRecordSet.RecordCount; i++)
-                {
-
-                    oDBDataSource.InsertRecord(oDBDataSource.Size);
-
-                    oDBDataSource.SetValue("U_BPP_ASIENTOORG", oDBDataSource.Size - 1, oRecordSet.Fields.Item("AsientoOrigen").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_CTANATU", oDBDataSource.Size - 1, oRecordSet.Fields.Item("CuentaNaturaleza").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_CTADEST", oDBDataSource.Size - 1, retornaSegmentAll(oRecordSet.Fields.Item("CuentaDestino").Value.ToString()));
-                    oDBDataSource.SetValue("U_BPP_MONEDA", oDBDataSource.Size - 1, oRecordSet.Fields.Item("Moneda").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_MNTLOCAL", oDBDataSource.Size - 1, oRecordSet.Fields.Item("MontoLocal").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_MNTEXTR", oDBDataSource.Size - 1, oRecordSet.Fields.Item("MontoExtranjero").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_MNTSIST", oDBDataSource.Size - 1, oRecordSet.Fields.Item("MontoSistema").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_FECCONT", oDBDataSource.Size - 1, oRecordSet.Fields.Item("FechaContabilizacion").Value.ToString("yyyyMMdd"));
-                    oDBDataSource.SetValue("U_BPP_FECDOC", oDBDataSource.Size - 1, oRecordSet.Fields.Item("FechaDocumento").Value.ToString("yyyyMMdd"));
-                    oDBDataSource.SetValue("U_BPP_FECVENC", oDBDataSource.Size - 1, oRecordSet.Fields.Item("FechaVencimiento").Value.ToString("yyyyMMdd"));
-                    oDBDataSource.SetValue("U_BPP_REFERENCIA", oDBDataSource.Size - 1, oRecordSet.Fields.Item("Referencia").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_REF2", oDBDataSource.Size - 1, oRecordSet.Fields.Item("Referencia2").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_COMENTARIO", oDBDataSource.Size - 1, oRecordSet.Fields.Item("Comentarios").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_CC1", oDBDataSource.Size - 1, oRecordSet.Fields.Item("CC1").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_CC2", oDBDataSource.Size - 1, oRecordSet.Fields.Item("CC2").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_CC3", oDBDataSource.Size - 1, oRecordSet.Fields.Item("CC3").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_CC4", oDBDataSource.Size - 1, oRecordSet.Fields.Item("CC4").Value.ToString());
-                    oDBDataSource.SetValue("U_BPP_CC5", oDBDataSource.Size - 1, oRecordSet.Fields.Item("CC5").Value.ToString());
-
-
-                    oRecordSet.MoveNext();
+                    dBDataSource.InsertRecord(dBDataSource.Size);
+                    dBDataSource.SetValue("U_BPP_ASIENTOORG", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("AsientoOrigen").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_CTANATU", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("CuentaNaturaleza").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_CTADEST", dBDataSource.Size - 1, retornaSegmentAll(((dynamic)recordset.Fields.Item("CuentaDestino").Value).ToString()));
+                    dBDataSource.SetValue("U_BPP_MONEDA", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("Moneda").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_MNTLOCAL", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("MontoLocal").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_MNTEXTR", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("MontoExtranjero").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_MNTSIST", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("MontoSistema").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_FECCONT", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("FechaContabilizacion").Value).ToString("yyyyMMdd"));
+                    dBDataSource.SetValue("U_BPP_FECDOC", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("FechaDocumento").Value).ToString("yyyyMMdd"));
+                    dBDataSource.SetValue("U_BPP_FECVENC", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("FechaVencimiento").Value).ToString("yyyyMMdd"));
+                    dBDataSource.SetValue("U_BPP_REFERENCIA", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("Referencia").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_REF2", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("Referencia2").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_COMENTARIO", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("Comentarios").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_CC1", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("CC1").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_CC2", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("CC2").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_CC3", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("CC3").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_CC4", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("CC4").Value).ToString());
+                    dBDataSource.SetValue("U_BPP_CC5", dBDataSource.Size - 1, ((dynamic)recordset.Fields.Item("CC5").Value).ToString());
+                    recordset.MoveNext();
                 }
 
-                oMatrix.Clear();
-                oMatrix.LoadFromDataSource();
-                oMatrix.AutoResizeColumns();
-
-                oForm.Freeze(false);
-
+                matrix.Clear();
+                matrix.LoadFromDataSource();
+                matrix.AutoResizeColumns();
+                oForm.Freeze(newVal: false);
             }
             catch (Exception ex)
             {
-                SAPMain.MensajeError(ex.Message.ToString(), true);
-                oForm.Freeze(false);
+                SAPMain.MensajeError(ex.Message.ToString(), estado: true);
+                oForm.Freeze(newVal: false);
             }
         }
         private bool generarAsientos()
         {
-            int rpta = SAPMain.SBO_Application.MessageBox("Se generarán los asientos de destino, ¿Desea continuar?", 1, "Si", "No", "");
-            if (rpta != 1) return false;
+            int num = SAPMain.SBO_Application.MessageBox("Se generarán los asientos de destino, ¿Desea continuar?", 1, "Si", "No");
+            if (num != 1)
+            {
+                return false;
+            }
+
             try
             {
-                Recordset oRecordSet = (SAPbobsCOM.Recordset)SAPMain.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-                JournalEntries oAsiento = null;
-                Matrix oMatrix = (Matrix)oForm.Items.Item("matDet1").Specific;
-                int rows = oMatrix.RowCount;
-
-                ComboBox oComboPeriodo = oForm.Items.Item("txtPeriodo").Specific;
-
-                if (rows != 0 && !oComboPeriodo.Value.Equals(""))
+                Recordset recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+                JournalEntries journalEntries = null;
+                Matrix matrix = (Matrix)(dynamic)oForm.Items.Item("matDet1").Specific;
+                int rowCount = matrix.RowCount;
+                ComboBox comboBox = (dynamic)oForm.Items.Item("txtPeriodo").Specific;
+                if (rowCount != 0 && !comboBox.Value.Equals(""))
                 {
-                    string periodo = oComboPeriodo.Selected.Description;
-                    DBDataSource oDBDataSource = this.oForm.DataSources.DBDataSources.Item("@BPP_CTD_DET1");
-
+                    string description = comboBox.Selected.Description;
+                    DBDataSource dBDataSource = oForm.DataSources.DBDataSources.Item("@BPP_CTD_DET1");
                     if (!SAPMain.oCompany.InTransaction)
                     {
                         SAPMain.oCompany.StartTransaction();
                     }
 
                     SAPMain.MensajeAdvertencia("Creando los asientos destino. Espere por favor...");
-                    oForm.Freeze(true);
-                    for (int i = 0; i < oDBDataSource.Size; i++)
+                    oForm.Freeze(newVal: true);
+                    for (int i = 0; i < dBDataSource.Size; i++)
                     {
-
-                        double montoLoc = double.Parse(oDBDataSource.GetValue("U_BPP_MNTLOCAL", i).ToString().Trim());
-                        double montoExt = double.Parse(oDBDataSource.GetValue("U_BPP_MNTEXTR", i).ToString().Trim());
-                        double montoSis = double.Parse(oDBDataSource.GetValue("U_BPP_MNTSIST", i).ToString().Trim());
-                        oAsiento = (SAPbobsCOM.JournalEntries)SAPMain.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oJournalEntries);
-
-                        oAsiento.ReferenceDate = DateTime.ParseExact(oDBDataSource.GetValue("U_BPP_FECCONT", i).ToString().Trim(), "yyyyMMdd", null);
-                        oAsiento.TaxDate = DateTime.ParseExact(oDBDataSource.GetValue("U_BPP_FECDOC", i).ToString().Trim(), "yyyyMMdd", null);
-                        oAsiento.DueDate = DateTime.ParseExact(oDBDataSource.GetValue("U_BPP_FECVENC", i).ToString().Trim(), "yyyyMMdd", null);
-
-                        oAsiento.TransactionCode = "DES";
-                        oAsiento.Reference = oDBDataSource.GetValue("U_BPP_ASIENTOORG", i).ToString().Trim();
-                        oAsiento.Reference2 = oDBDataSource.GetValue("U_BPP_REF2", i).ToString().Trim();
-                        oAsiento.Memo = "ADD-ON BPP ASIENTO DE DESTINO " + periodo;
-
-                        oAsiento.Lines.AccountCode = retornaAcctCode(oDBDataSource.GetValue("U_BPP_CTADEST", i).ToString().Trim());
-                        oAsiento.Lines.ShortName = oAsiento.Lines.AccountCode;
-
-                        oAsiento.Lines.Reference1 = oDBDataSource.GetValue("U_BPP_ASIENTOORG", i).ToString().Trim();
-                        oAsiento.Lines.Reference2 = oDBDataSource.GetValue("U_BPP_REF2", i).ToString().Trim(); ;
-                        oAsiento.Lines.LineMemo = oDBDataSource.GetValue("U_BPP_COMENTARIO", i).ToString().Trim();
-
-
-                        if (montoLoc >= 0 && montoSis >= 0)
+                        double num2 = double.Parse(dBDataSource.GetValue("U_BPP_MNTLOCAL", i).ToString().Trim());
+                        double num3 = double.Parse(dBDataSource.GetValue("U_BPP_MNTEXTR", i).ToString().Trim());
+                        double num4 = double.Parse(dBDataSource.GetValue("U_BPP_MNTSIST", i).ToString().Trim());
+                        journalEntries = (JournalEntries)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.oJournalEntries);
+                        journalEntries.ReferenceDate = DateTime.ParseExact(dBDataSource.GetValue("U_BPP_FECCONT", i).ToString().Trim(), "yyyyMMdd", null);
+                        journalEntries.TaxDate = DateTime.ParseExact(dBDataSource.GetValue("U_BPP_FECDOC", i).ToString().Trim(), "yyyyMMdd", null);
+                        journalEntries.DueDate = DateTime.ParseExact(dBDataSource.GetValue("U_BPP_FECVENC", i).ToString().Trim(), "yyyyMMdd", null);
+                        journalEntries.TransactionCode = "DES";
+                        journalEntries.Reference = dBDataSource.GetValue("U_BPP_ASIENTOORG", i).ToString().Trim();
+                        journalEntries.Reference2 = dBDataSource.GetValue("U_BPP_REF2", i).ToString().Trim();
+                        journalEntries.Memo = "ADD-ON BPP ASIENTO DE DESTINO " + description;
+                        journalEntries.Lines.AccountCode = retornaAcctCode(dBDataSource.GetValue("U_BPP_CTADEST", i).ToString().Trim());
+                        journalEntries.Lines.ShortName = journalEntries.Lines.AccountCode;
+                        journalEntries.Lines.Reference1 = dBDataSource.GetValue("U_BPP_ASIENTOORG", i).ToString().Trim();
+                        journalEntries.Lines.Reference2 = dBDataSource.GetValue("U_BPP_REF2", i).ToString().Trim();
+                        journalEntries.Lines.LineMemo = dBDataSource.GetValue("U_BPP_COMENTARIO", i).ToString().Trim();
+                        if (num2 >= 0.0 && num4 >= 0.0)
                         {
-                            oAsiento.Lines.Debit = montoLoc;
-                            oAsiento.Lines.DebitSys = montoSis;
+                            journalEntries.Lines.Debit = num2;
+                            journalEntries.Lines.DebitSys = num4;
                         }
                         else
                         {
-                            oAsiento.Lines.Credit = montoLoc * -1;
-                            oAsiento.Lines.CreditSys = montoSis * -1;
+                            journalEntries.Lines.Credit = num2 * -1.0;
+                            journalEntries.Lines.CreditSys = num4 * -1.0;
                         }
 
-                        if (montoExt != 0)
+                        if (num3 != 0.0)
                         {
-                            oAsiento.Lines.FCCurrency = oDBDataSource.GetValue("U_BPP_MONEDA", i).ToString().Trim();
-                            if (montoExt >= 0 && montoSis >= 0)
-                                oAsiento.Lines.FCDebit = montoExt;
+                            journalEntries.Lines.FCCurrency = dBDataSource.GetValue("U_BPP_MONEDA", i).ToString().Trim();
+                            if (num3 >= 0.0 && num4 >= 0.0)
+                            {
+                                journalEntries.Lines.FCDebit = num3;
+                            }
                             else
-                                oAsiento.Lines.FCCredit = montoExt * -1;
+                            {
+                                journalEntries.Lines.FCCredit = num3 * -1.0;
+                            }
                         }
 
-                        oAsiento.Lines.Add();
-                        oAsiento.Lines.SetCurrentLine(1);
-
-                        oAsiento.Lines.AccountCode = retornaAcctCode(SAPMain.cuentaContraPartida);
-                        oAsiento.Lines.ShortName = oAsiento.Lines.AccountCode;
-
-                        oAsiento.Lines.Reference1 = oDBDataSource.GetValue("U_BPP_ASIENTOORG", i).ToString().Trim();
-                        oAsiento.Lines.Reference2 = oDBDataSource.GetValue("U_BPP_REF2", i).ToString().Trim(); ;
-                        oAsiento.Lines.LineMemo = oDBDataSource.GetValue("U_BPP_COMENTARIO", i).ToString().Trim();
-
-                        oAsiento.Lines.CostingCode = oDBDataSource.GetValue("U_BPP_CC1", i).ToString().Trim();
-                        oAsiento.Lines.CostingCode2 = oDBDataSource.GetValue("U_BPP_CC2", i).ToString().Trim();
-                        oAsiento.Lines.CostingCode3 = oDBDataSource.GetValue("U_BPP_CC3", i).ToString().Trim();
-                        oAsiento.Lines.CostingCode4 = oDBDataSource.GetValue("U_BPP_CC4", i).ToString().Trim();
-                        oAsiento.Lines.CostingCode5 = oDBDataSource.GetValue("U_BPP_CC5", i).ToString().Trim();
-
-                        if (montoLoc >= 0 && montoSis >= 0)
+                        journalEntries.Lines.Add();
+                        journalEntries.Lines.SetCurrentLine(1);
+                        journalEntries.Lines.AccountCode = retornaAcctCode(SAPMain.cuentaContraPartida);
+                        journalEntries.Lines.ShortName = journalEntries.Lines.AccountCode;
+                        journalEntries.Lines.Reference1 = dBDataSource.GetValue("U_BPP_ASIENTOORG", i).ToString().Trim();
+                        journalEntries.Lines.Reference2 = dBDataSource.GetValue("U_BPP_REF2", i).ToString().Trim();
+                        journalEntries.Lines.LineMemo = dBDataSource.GetValue("U_BPP_COMENTARIO", i).ToString().Trim();
+                        journalEntries.Lines.CostingCode = dBDataSource.GetValue("U_BPP_CC1", i).ToString().Trim();
+                        journalEntries.Lines.CostingCode2 = dBDataSource.GetValue("U_BPP_CC2", i).ToString().Trim();
+                        journalEntries.Lines.CostingCode3 = dBDataSource.GetValue("U_BPP_CC3", i).ToString().Trim();
+                        journalEntries.Lines.CostingCode4 = dBDataSource.GetValue("U_BPP_CC4", i).ToString().Trim();
+                        journalEntries.Lines.CostingCode5 = dBDataSource.GetValue("U_BPP_CC5", i).ToString().Trim();
+                        if (num2 >= 0.0 && num4 >= 0.0)
                         {
-                            oAsiento.Lines.Credit = montoLoc;
-                            oAsiento.Lines.CreditSys = montoSis;
+                            journalEntries.Lines.Credit = num2;
+                            journalEntries.Lines.CreditSys = num4;
                         }
                         else
                         {
-                            oAsiento.Lines.Debit = montoLoc * -1;
-                            oAsiento.Lines.DebitSys = montoSis * -1;
+                            journalEntries.Lines.Debit = num2 * -1.0;
+                            journalEntries.Lines.DebitSys = num4 * -1.0;
                         }
 
-                        if (montoExt != 0)
+                        if (num3 != 0.0)
                         {
-                            oAsiento.Lines.FCCurrency = oDBDataSource.GetValue("U_BPP_MONEDA", i).ToString().Trim();
-                            if (montoExt >= 0 && montoSis >= 0)
-                                oAsiento.Lines.FCCredit = montoExt;
+                            journalEntries.Lines.FCCurrency = dBDataSource.GetValue("U_BPP_MONEDA", i).ToString().Trim();
+                            if (num3 >= 0.0 && num4 >= 0.0)
+                            {
+                                journalEntries.Lines.FCCredit = num3;
+                            }
                             else
-                                oAsiento.Lines.FCDebit = montoExt * -1;
+                            {
+                                journalEntries.Lines.FCDebit = num3 * -1.0;
+                            }
                         }
 
-                        if (oAsiento.Add() != 0)
+                        if (journalEntries.Add() != 0)
                         {
                             if (SAPMain.oCompany.InTransaction)
                             {
                                 SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
                             }
-                            oForm.Freeze(false);
 
-                            string error = string.Format("{0}-{1}", SAPMain.oCompany.GetLastErrorCode(), SAPMain.oCompany.GetLastErrorDescription());
-                            SAPMain.MensajeError(error, true);
-
+                            oForm.Freeze(newVal: false);
+                            string mensaje = $"{SAPMain.oCompany.GetLastErrorCode()}-{SAPMain.oCompany.GetLastErrorDescription()}";
+                            SAPMain.MensajeError(mensaje, estado: true);
                             return false;
-
                         }
-                        else
-                        {
-                            string transidDestino = SAPMain.oCompany.GetNewObjectKey();
 
-
-                            oDBDataSource.SetValue("U_BPP_ASIENTODEST", i, transidDestino);
-
-
-                            SAPMain.MensajeExito("Se creo el asiento : " + transidDestino);
-                        }
+                        string newObjectKey = SAPMain.oCompany.GetNewObjectKey();
+                        dBDataSource.SetValue("U_BPP_ASIENTODEST", i, newObjectKey);
+                        actlzAsientosExitoso(dBDataSource.GetValue("U_BPP_ASIENTOORG", i));
+                        SAPMain.MensajeExito("Se creo el asiento : " + newObjectKey);
                     }
-                    oMatrix.LoadFromDataSource();
 
+                    matrix.LoadFromDataSource();
                     if (SAPMain.oCompany.InTransaction)
                     {
                         SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_Commit);
-                        ComboBox oComboEstado = oForm.Items.Item("txtEstado").Specific;
-                        oComboEstado.Select("Procesado", BoSearchKey.psk_ByValue);
-                        oForm.Freeze(false);
+                        ComboBox comboBox2 = (dynamic)oForm.Items.Item("txtEstado").Specific;
+                        comboBox2.Select("Procesado");
+                        oForm.Freeze(newVal: false);
                         return true;
                     }
                 }
-                else
+                else if (comboBox.Value.Equals(""))
                 {
-                    if (oComboPeriodo.Value.Equals(""))
-                    {
-                        SAPMain.MensajeError("Debe seleccionar un periodo.", true);
-                    }
-                    else if (rows == 0)
-                    {
-                        SAPMain.MensajeError("No existen filas por procesar.", true);
-                    }
+                    SAPMain.MensajeError("Debe seleccionar un periodo.", estado: true);
+                }
+                else if (rowCount == 0)
+                {
+                    SAPMain.MensajeError("No existen filas por procesar.", estado: true);
                 }
 
                 return false;
-
             }
             catch (Exception ex)
             {
                 if (SAPMain.oCompany.InTransaction)
                 {
                     SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
-                    SAPMain.MensajeError(ex.ToString(), true);
-                    oForm.Freeze(false);
+                    SAPMain.MensajeError(ex.ToString(), estado: true);
+                    oForm.Freeze(newVal: false);
                 }
-                SAPMain.MensajeError(ex.ToString(), true);
+
+                SAPMain.MensajeError(ex.ToString(), estado: true);
                 return false;
+            }
+        }
+        private void actlzAsientosExitoso(string transId)
+        {
+            try
+            {
+                Recordset recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+                string text = "UPDATE OJDT SET \"U_STR_ADP\" = 'Y' WHERE \"TransId\" = '" + transId + "'";
+                Global.WriteToFile(text);
+                recordset.DoQuery(text);
+                recordset = null;
+            }
+            catch (Exception ex)
+            {
+                Global.WriteToFile(ex.Message);
             }
         }
 
@@ -437,6 +298,7 @@ namespace BPP
                 else
                     query = $"SELECT \"Segment_0\"+'-'+\"Segment_1\"+'-'+\"Segment_2\" FROM OACT WHERE \"Segment_0\" = '{code}'";
 
+                Global.WriteToFile(query);
                 oRecordSet.DoQuery(query);
                 if (oRecordSet.Fields.Count > 0)
                 {
@@ -460,7 +322,7 @@ namespace BPP
                 else
                 {
                     string[] codes = code.Split('-');
-
+                    Global.WriteToFile($"SELECT \"AcctCode\" FROM OACT WHERE \"Segment_0\" = '{codes[0]}'");
                     oRecordSet.DoQuery($"SELECT \"AcctCode\" FROM OACT WHERE \"Segment_0\" = '{codes[0]}'");
                     acctCode = oRecordSet.Fields.Item(0).Value.ToString();
                     if (string.IsNullOrEmpty(acctCode))

@@ -20,19 +20,11 @@ namespace BPP
 
                 switch (pVal.FormTypeEx)
                 {
-                    case "141":
-                        PurchaseInvoiceItemEvent purchaseInvoiceItemEvent = new PurchaseInvoiceItemEvent();
-                        purchaseInvoiceItemEvent.itemAction(FormUID, ref pVal, out BubbleEvent);
-                        break;
-                    case "181":
-                        PurchaseCreditNoteItemEvent purchaseCreditNoteItemEvent = new PurchaseCreditNoteItemEvent();
-                        purchaseCreditNoteItemEvent.itemAction(FormUID, ref pVal, out BubbleEvent);
-                        break;
                     case "UDO_FT_BPP_CTADEST3":
                         CuentasDestinoItemEvent cuentasDestinoItemEvent = new CuentasDestinoItemEvent();
                         cuentasDestinoItemEvent.itemAction(FormUID, ref pVal, out BubbleEvent);
                         break;
-                    case "UDO_FT_BPP_PAGM2":
+                    case "UDO_FT_BPP_PAGM4":
                         PagosMasivosProveedoresItemEvent pagosMasivosProveedoresItemEvent = new PagosMasivosProveedoresItemEvent();
                         pagosMasivosProveedoresItemEvent.itemAction(FormUID, ref pVal, out BubbleEvent);
 

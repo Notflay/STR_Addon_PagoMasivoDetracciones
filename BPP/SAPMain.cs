@@ -16,6 +16,8 @@ namespace BPP
         public static string rutaDetraciones = null;
         public static string rutaPagos = null;
         public static string codTransaccionDestino = null;
+        public static int opcionPagoMasivo = 1;
+
         public static string cuentaContraPartida = null;
         public static bool segmentado;
 
@@ -54,7 +56,7 @@ namespace BPP
         public enum FormularioUsuario
         {
             frmParam,
-            UDO_FT_BPP_PAGM2,
+            UDO_FT_BPP_PAGM4,
             UDO_FT_BPP_DETR2,
             UDO_FT_BPP_CTADEST3
         }

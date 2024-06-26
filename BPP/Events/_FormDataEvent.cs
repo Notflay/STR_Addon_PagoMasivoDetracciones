@@ -23,7 +23,7 @@ namespace BPP
                         CuentasDestinoFormDataEvent cuentasDestinoFormDataEvent = new CuentasDestinoFormDataEvent();
                         cuentasDestinoFormDataEvent.dataFormAction(ref BusinessObjectInfo, out BubbleEvent);
                         break;
-                    case "UDO_FT_BPP_PAGM2":
+                    case "UDO_FT_BPP_PAGM4":
 
                         PagosMasivosProveedoresGenerateDataEvent pagosMasivosProveedoresGenerateDataEvent = new PagosMasivosProveedoresGenerateDataEvent();
                         pagosMasivosProveedoresGenerateDataEvent.dataFormAction(ref BusinessObjectInfo, out BubbleEvent);

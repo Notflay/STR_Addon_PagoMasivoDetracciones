@@ -1,8 +1,11 @@
 ﻿using SAPbobsCOM;
+using SAPbouiCOM;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,83 +35,60 @@ namespace BPP
 
         private static void SetApplication()
         {
-
-            SAPbouiCOM.SboGuiApi SboGuiApi = null;
-            string sConnectionString = null;
-            SboGuiApi = new SAPbouiCOM.SboGuiApi();
-            // sConnectionString = System.Convert.ToString(Environment.GetCommandLineArgs().GetValue(1));
-            SboGuiApi.Connect("0030002C0030002C00530041005000420044005F00440061007400650076002C0050004C006F006D0056004900490056");
-
-            SAPMain.SBO_Application = SboGuiApi.GetApplication(-1);
-            //SAPMain.SBO_Application.SetStatusBarMessage("error",SAPbouiCOM.BoMessageTime.bmt_Medium,true);
-            SAPMain.oCompany = SAPMain.SBO_Application.Company.GetDICompany();
+            Global.WriteToFile("Se activo el ADDON DE PAGOS MASIVOS");
+            SboGuiApi sboGuiApi = null;
+            string fileStream = null;
+            sboGuiApi = (SboGuiApi)Activator.CreateInstance(Marshal.GetTypeFromCLSID(new Guid("6CF0D1E0-470B-4684-B9B5-70F9A5ACBB06")));
+            sboGuiApi.Connect("0030002C0030002C00530041005000420044005F00440061007400650076002C0050004C006F006D0056004900490056");
+            SAPMain.SBO_Application = sboGuiApi.GetApplication();
+            SAPMain.oCompany = (dynamic)SAPMain.SBO_Application.Company.GetDICompany();
         }
 
         private int ConnectToCompany()
         {
-            int connectToCompanyReturn = 0;
-            connectToCompanyReturn = SAPMain.oCompany.Connect();
-            return connectToCompanyReturn;
-
+            int num = 0;
+            return SAPMain.oCompany.Connect();
         }
+
         private bool ValidarRegion()
         {
-            // Comentado Solo para DRESDEN 
-            /*
-            var regionInfo = RegionInfo.CurrentRegion;
-            string name = regionInfo.Name;
-            string englishName = regionInfo.EnglishName;
-            string displayName = regionInfo.DisplayName;
-
-            string s;
-
-            s = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator;
-
-            if (!s.Equals("."))
-            {
-                SAPMain.MensajeError("El separador decimal es: '" + s + "'. Formato Incorrecto, actualizar la configuración de Windows a separador decimal '.' . ");
-
-                Environment.Exit(0);
-                return false;
-            }
-            //Console.WriteLine("El separador decimal es: '" + s + "'");
-            s = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyGroupSeparator;
-
-            if (!s.Equals(","))
-            {
-                SAPMain.MensajeError("El separador de miles es: '" + s + "'. Formato Incorrecto, actualizar la configuración de Windows a separador decimal ',' . ");
-                Environment.Exit(0);
-                return false;
-            }
-
-            //Console.WriteLine("El separador de miles es: '" + s + "'");
-            */
             return true;
-
         }
+
         private void SetearVariables()
         {
-            Recordset oRecordSet = (Recordset)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
-            string query = string.Format("SELECT TOP 1 * FROM \"@BPP_PARAMS\"");
-            oRecordSet.DoQuery(query);
-
-            SAPMain.cuentaPuente = oRecordSet.Fields.Item("U_BPP_CNTPUENTE").Value.ToString();
-            SAPMain.numeroLote = oRecordSet.Fields.Item("U_BPP_NROLOTE").Value.ToString();
-            SAPMain.rutaDetraciones = oRecordSet.Fields.Item("U_BPP_DETRUTA").Value.ToString();
-            SAPMain.rutaPagos = oRecordSet.Fields.Item("U_BPP_PGMRUTA").Value.ToString();
-            SAPMain.cuentaContraPartida = oRecordSet.Fields.Item("U_BPP_CNTCONTR").Value.ToString();
-            SAPMain.segmentado = GetSegmento();
+            try
+            {
+                Recordset recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+                string fileStream = $"SELECT TOP 1 * FROM \"@BPP_PARAMS\"";
+                Global.WriteToFile(fileStream);
+                recordset.DoQuery(fileStream);
+                SAPMain.cuentaPuente = ((dynamic)recordset.Fields.Item("U_BPP_CNTPUENTE").Value).ToString();
+                SAPMain.numeroLote = ((dynamic)recordset.Fields.Item("U_BPP_NROLOTE").Value).ToString();
+                SAPMain.rutaDetraciones = ((dynamic)recordset.Fields.Item("U_BPP_DETRUTA").Value).ToString();
+                SAPMain.rutaPagos = ((dynamic)recordset.Fields.Item("U_BPP_PGMRUTA").Value).ToString();
+                SAPMain.cuentaContraPartida = ((dynamic)recordset.Fields.Item("U_BPP_CNTCONTR").Value).ToString();
+                SAPMain.opcionPagoMasivo = Convert.ToInt32((dynamic)recordset.Fields.Item("U_STR_NUMOPERTXT").Value);
+                SAPMain.segmentado = GetSegmento();
+            }
+            catch (Exception)
+            {
+            }
         }
+
         private bool GetSegmento()
         {
-            Recordset oRecordSet = (Recordset)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
-            oRecordSet.DoQuery("SELECT \"EnbSgmnAct\" FROM CINF");
-
-            if (oRecordSet.Fields.Count < 1)
+            Recordset recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+            Global.WriteToFile("SELECT \"EnbSgmnAct\" FROM CINF");
+            recordset.DoQuery("SELECT \"EnbSgmnAct\" FROM CINF");
+            if (recordset.Fields.Count < 1)
+            {
+                Global.WriteToFile("No se cuenta con segmento activo");
                 throw new Exception("No se cuenta con segmento activo");
-
-            return oRecordSet.Fields.Item(0).Value.Equals("Y");
+            }
+            return ((dynamic)recordset.Fields.Item(0).Value).Equals("Y");
         }
+
         public void SetEvents()
         {
 
@@ -127,87 +107,76 @@ namespace BPP
 
         private void sb_Filters()
         {
-            SAPbouiCOM.EventFilters eventFilters = new SAPbouiCOM.EventFilters();
-            SAPbouiCOM.EventFilter eventFilter = null;
-
-            eventFilter = eventFilters.Add(SAPbouiCOM.BoEventTypes.et_ALL_EVENTS);
-            Enum.GetNames(typeof(FormularioUsuario)).Cast<string>().ToList().ForEach(s => eventFilter.AddEx(s));
-            SBO_Application.SetFilter(eventFilters);
+            EventFilters fileStream = (EventFilters)Activator.CreateInstance(Marshal.GetTypeFromCLSID(new Guid("400686C8-0705-4A36-BFA5-D49D1B361388")));
+            EventFilter eventFilter = null;
+            eventFilter = fileStream.Add(BoEventTypes.et_ALL_EVENTS);
+            Enum.GetNames(typeof(SAPMain.FormularioUsuario)).Cast<string>().ToList()
+                .ForEach(delegate (string s)
+                {
+                    eventFilter.AddEx(s);
+                });
+            SAPMain.SBO_Application.SetFilter(fileStream);
         }
 
         private void AddnMenuItems()
         {
-            XmlDocument oMnuXML = new XmlDocument();
-            SAPMain.SBO_Application.Forms.GetFormByTypeAndCount(169, 1).Freeze(true);
+            XmlDocument xmlDocument = new XmlDocument();
+            SAPMain.SBO_Application.Forms.GetFormByTypeAndCount(169, 1).Freeze(newVal: true);
             try
             {
-                //string rutaMenuXML = $"{Application.StartupPath}\\Menus\\Menu.xml";
-
-                /*
-                oMnuXML.LoadXml(Properties.Resources.Menu);
-                SAPMain.SBO_Application.LoadBatchActions(oMnuXML.InnerXml);
-                */
-
-                SAPbouiCOM.Menus oMenus = null;
-                SAPbouiCOM.MenuItem oMenuItem = null;
-                SAPbouiCOM.MenuCreationParams oCreationPackage = null;
-
-                oCreationPackage = ((SAPbouiCOM.MenuCreationParams)(SAPMain.SBO_Application.CreateObject(SAPbouiCOM.BoCreatableObjectType.cot_MenuCreationParams)));
-
-
-                oMenuItem = SAPMain.SBO_Application.Menus.Item("MNULOCALI");
-                oMenus = oMenuItem.SubMenus;
-
-                if (!oMenus.Exists("mnuParam")) 
+                Menus fileStream = null;
+                SAPbouiCOM.MenuItem logDirInfo = null;
+                MenuCreationParams logFileInfo = null;
+                logFileInfo = (MenuCreationParams)(dynamic)SAPMain.SBO_Application.CreateObject(BoCreatableObjectType.cot_MenuCreationParams);
+                logDirInfo = SAPMain.SBO_Application.Menus.Item("MNULOCALI");
+                fileStream = logDirInfo.SubMenus;
+                if (!fileStream.Exists("mnuParam"))
                 {
-                    oCreationPackage.Type = SAPbouiCOM.BoMenuType.mt_STRING;
-                    oCreationPackage.UniqueID = "mnuParam";
-                    oCreationPackage.String = "Configuración Pagos Masivo";
-                    oCreationPackage.Position = 6;
-                    oCreationPackage.Image = "";
-                    oMenus.AddEx(oCreationPackage);
+                    logFileInfo.Type = BoMenuType.mt_STRING;
+                    logFileInfo.UniqueID = "mnuParam";
+                    logFileInfo.String = "Configuración Pagos Masivo";
+                    logFileInfo.Position = 6;
+                    logFileInfo.Image = "";
+                    fileStream.AddEx(logFileInfo);
                 }
-
-                oMenuItem = SAPMain.SBO_Application.Menus.Item("MNULOCALI");
-                oMenus = oMenuItem.SubMenus;
-
-                if (!oMenus.Exists("mnuPagos"))
+                logDirInfo = SAPMain.SBO_Application.Menus.Item("MNULOCALI");
+                fileStream = logDirInfo.SubMenus;
+                if (!fileStream.Exists("mnuPagos"))
                 {
-                    oCreationPackage.Type = SAPbouiCOM.BoMenuType.mt_STRING;
-                    oCreationPackage.UniqueID = "mnuPagos";
-                    oCreationPackage.String = "Pagos Masivos de Proveedores";
-                    oCreationPackage.Position = 8;
-                    oCreationPackage.Image = "";
-                    oMenus.AddEx(oCreationPackage);
+                    logFileInfo.Type = BoMenuType.mt_STRING;
+                    logFileInfo.UniqueID = "mnuPagos";
+                    logFileInfo.String = "Pagos Masivos de Proveedores";
+                    logFileInfo.Position = 8;
+                    logFileInfo.Image = "";
+                    fileStream.AddEx(logFileInfo);
                 }
-
-                    oMenuItem = SAPMain.SBO_Application.Menus.Item("MNULOCALI");
-                oMenus = oMenuItem.SubMenus;
-
-                if (!oMenus.Exists("mnuCtaDest"))
+                logDirInfo = SAPMain.SBO_Application.Menus.Item("MNULOCALI");
+                fileStream = logDirInfo.SubMenus;
+                if (!fileStream.Exists("mnuCtaDest"))
                 {
-                    oCreationPackage.Type = SAPbouiCOM.BoMenuType.mt_STRING;
-                    oCreationPackage.UniqueID = "mnuCtaDest";
-                    oCreationPackage.String = "Cuenta Destino - Detalle";
-                    oCreationPackage.Position = 9;
-                    oCreationPackage.Image = "";
-                    oMenus.AddEx(oCreationPackage);
+                    logFileInfo.Type = BoMenuType.mt_STRING;
+                    logFileInfo.UniqueID = "mnuCtaDest";
+                    logFileInfo.String = "Cuenta Destino - Detalle";
+                    logFileInfo.Position = 9;
+                    logFileInfo.Image = "";
+                    fileStream.AddEx(logFileInfo);
                 }
-
             }
-            catch (System.IO.FileNotFoundException)
+            catch (FileNotFoundException)
             {
-                SAPMain.SBO_Application.StatusBar.SetText("El recurso: Menu.xml, no fue encontrado...", SAPbouiCOM.BoMessageTime.bmt_Short, SAPbouiCOM.BoStatusBarMessageType.smt_Error);
+                Global.WriteToFile("El recurso: Menu.xml, no fue encontrado...");
+                SAPMain.SBO_Application.StatusBar.SetText("El recurso: Menu.xml, no fue encontrado...", BoMessageTime.bmt_Short);
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
-                SAPMain.SBO_Application.StatusBar.SetText(ex.Message, SAPbouiCOM.BoMessageTime.bmt_Short, SAPbouiCOM.BoStatusBarMessageType.smt_Error);
+                Global.WriteToFile(ex2.Message.ToString());
+                SAPMain.SBO_Application.StatusBar.SetText(ex2.Message, BoMessageTime.bmt_Short);
             }
             finally
             {
-                SAPMain.SBO_Application.Forms.GetFormByTypeAndCount(169, 1).Freeze(false);
+                SAPMain.SBO_Application.Forms.GetFormByTypeAndCount(169, 1).Freeze(newVal: false);
                 SAPMain.SBO_Application.Forms.GetFormByTypeAndCount(169, 1).Update();
-                oMnuXML = null;
+                xmlDocument = null;
             }
         }
     }
