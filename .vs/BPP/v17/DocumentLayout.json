@@ -3,43 +3,39 @@
   "WorkspaceRootPath": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|BPP||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\bpp\\events\\itemevent\\bpp_ui\\pagosmasivosproveedoresitemevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\events\\itemevent\\bpp_ui\\pagosmasivosproveedoresitemevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|d:\\sebas\\adp\\str_addon_pagomasivodetracciones-main\\bpp\\resources\\localizacion\\frmparam1.srf||{C76D83F8-A489-11D0-8195-00A0C91BBEE3}",
-      "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\resources\\localizacion\\frmparam1.srf||{C76D83F8-A489-11D0-8195-00A0C91BBEE3}"
+      "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\bpp\\events\\menuevent\\bpp_ui\\pagosmasivosproveedoresmenuevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\events\\menuevent\\bpp_ui\\pagosmasivosproveedoresmenuevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|d:\\sebas\\adp\\str_addon_pagomasivodetracciones-main\\bpp\\resources\\localizacion\\frmpagos.srf||{C76D83F8-A489-11D0-8195-00A0C91BBEE3}",
-      "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\resources\\localizacion\\frmpagos.srf||{C76D83F8-A489-11D0-8195-00A0C91BBEE3}"
+      "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|d:\\sebas\\adp\\str_addon_pagomasivodetracciones-main\\bpp\\events\\menuevent\\bpp_ui\\cuentasdestinomenuevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\events\\menuevent\\bpp_ui\\cuentasdestinomenuevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|d:\\sebas\\adp\\str_addon_pagomasivodetracciones-main\\bpp\\events\\formdataevent\\bpp_ui\\pagosmasivosproveedoresgeneratedataevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\events\\formdataevent\\bpp_ui\\pagosmasivosproveedoresgeneratedataevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\bpp\\forms\\pagosmasivosproveedoresui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\forms\\pagosmasivosproveedoresui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|d:\\sebas\\adp\\str_addon_pagomasivodetracciones-main\\bpp\\sapinit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\sapinit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|d:\\sebas\\adp\\str_addon_pagomasivodetracciones-main\\bpp\\events\\_itemevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\events\\_itemevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|d:\\sebas\\adp\\str_addon_pagomasivodetracciones-main\\bpp\\util\\global.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\util\\global.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|d:\\sebas\\adp\\str_addon_pagomasivodetracciones-main\\bpp\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|BPP||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\bpp\\forms\\parametrizacionesui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\forms\\parametrizacionesui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\bpp\\forms\\pagosmasivosproveedoresui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\forms\\pagosmasivosproveedoresui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\bpp\\util\\servertype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -48,10 +44,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\bpp\\menus\\menu.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\menus\\menu.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\bpp\\events\\menuevent\\bpp_ui\\pagosmasivosproveedoresmenuevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|solutionrelative:bpp\\events\\menuevent\\bpp_ui\\pagosmasivosproveedoresmenuevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8F1651B6-06D9-404D-B9B2-E7A785D357D4}|BPP\\BPP.csproj|d:\\sebas\\adp\\str_addon_pagomasivodetracciones-main\\bpp\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
@@ -64,20 +56,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PagosMasivosProveedoresItemEvent.cs",
               "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\ItemEvent\\BPP_UI\\PagosMasivosProveedoresItemEvent.cs",
               "RelativeDocumentMoniker": "BPP\\Events\\ItemEvent\\BPP_UI\\PagosMasivosProveedoresItemEvent.cs",
               "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\ItemEvent\\BPP_UI\\PagosMasivosProveedoresItemEvent.cs",
               "RelativeToolTip": "BPP\\Events\\ItemEvent\\BPP_UI\\PagosMasivosProveedoresItemEvent.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAA0AAAA",
+              "ViewState": "AQIAAFwCAAAAAAAAAIAywG4CAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-25T19:45:15.038Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CuentasDestinoMenuEvent.cs",
+              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\MenuEvent\\BPP_UI\\CuentasDestinoMenuEvent.cs",
+              "RelativeDocumentMoniker": "BPP\\Events\\MenuEvent\\BPP_UI\\CuentasDestinoMenuEvent.cs",
+              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\MenuEvent\\BPP_UI\\CuentasDestinoMenuEvent.cs",
+              "RelativeToolTip": "BPP\\Events\\MenuEvent\\BPP_UI\\CuentasDestinoMenuEvent.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-26T00:19:46.489Z",
               "EditorCaption": ""
             },
             {
@@ -106,59 +111,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmParam1.srf",
-              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Resources\\Localizacion\\frmParam1.srf",
-              "RelativeDocumentMoniker": "BPP\\Resources\\Localizacion\\frmParam1.srf",
-              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Resources\\Localizacion\\frmParam1.srf",
-              "RelativeToolTip": "BPP\\Resources\\Localizacion\\frmParam1.srf",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-06-26T00:14:18.781Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "frmPagos.srf",
-              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Resources\\Localizacion\\frmPagos.srf",
-              "RelativeDocumentMoniker": "BPP\\Resources\\Localizacion\\frmPagos.srf",
-              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Resources\\Localizacion\\frmPagos.srf",
-              "RelativeToolTip": "BPP\\Resources\\Localizacion\\frmPagos.srf",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-06-26T00:08:52.557Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SAPInit.cs",
-              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\SAPInit.cs",
-              "RelativeDocumentMoniker": "BPP\\SAPInit.cs",
-              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\SAPInit.cs",
-              "RelativeToolTip": "BPP\\SAPInit.cs",
-              "ViewState": "AQIAAEkAAAAAAAAAAAAwwFgAAABJAAAA",
+              "Title": "PagosMasivosProveedoresMenuEvent.cs",
+              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\MenuEvent\\BPP_UI\\PagosMasivosProveedoresMenuEvent.cs",
+              "RelativeDocumentMoniker": "BPP\\Events\\MenuEvent\\BPP_UI\\PagosMasivosProveedoresMenuEvent.cs",
+              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\MenuEvent\\BPP_UI\\PagosMasivosProveedoresMenuEvent.cs",
+              "RelativeToolTip": "BPP\\Events\\MenuEvent\\BPP_UI\\PagosMasivosProveedoresMenuEvent.cs",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAAAF0AAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T00:07:27.573Z",
+              "WhenOpened": "2024-06-25T23:51:40.654Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "_ItemEvent.cs",
-              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\_ItemEvent.cs",
-              "RelativeDocumentMoniker": "BPP\\Events\\_ItemEvent.cs",
-              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\_ItemEvent.cs",
-              "RelativeToolTip": "BPP\\Events\\_ItemEvent.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAYwBYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T00:07:11.813Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "BPP",
               "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\BPP.csproj",
               "RelativeDocumentMoniker": "BPP\\BPP.csproj",
@@ -170,28 +136,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AssemblyInfo.cs",
-              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Properties\\AssemblyInfo.cs",
-              "RelativeDocumentMoniker": "BPP\\Properties\\AssemblyInfo.cs",
-              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Properties\\AssemblyInfo.cs",
-              "RelativeToolTip": "BPP\\Properties\\AssemblyInfo.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAABGAAAA",
+              "DocumentIndex": 4,
+              "Title": "PagosMasivosProveedoresGenerateDataEvent.cs",
+              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\FormDataEvent\\BPP_UI\\PagosMasivosProveedoresGenerateDataEvent.cs",
+              "RelativeDocumentMoniker": "BPP\\Events\\FormDataEvent\\BPP_UI\\PagosMasivosProveedoresGenerateDataEvent.cs",
+              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\FormDataEvent\\BPP_UI\\PagosMasivosProveedoresGenerateDataEvent.cs",
+              "RelativeToolTip": "BPP\\Events\\FormDataEvent\\BPP_UI\\PagosMasivosProveedoresGenerateDataEvent.cs",
+              "ViewState": "AQIAAEkAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T00:05:43.16Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Global.cs",
-              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Util\\Global.cs",
-              "RelativeDocumentMoniker": "BPP\\Util\\Global.cs",
-              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Util\\Global.cs",
-              "RelativeToolTip": "BPP\\Util\\Global.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T00:03:34.643Z",
+              "WhenOpened": "2024-06-26T00:19:34.096Z",
               "EditorCaption": ""
             },
             {
@@ -208,7 +161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "ServerType.cs",
               "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Util\\ServerType.cs",
               "RelativeDocumentMoniker": "BPP\\Util\\ServerType.cs",
@@ -220,7 +173,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "Menu.xml",
               "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Menus\\Menu.xml",
               "RelativeDocumentMoniker": "BPP\\Menus\\Menu.xml",
@@ -232,27 +185,42 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "PagosMasivosProveedoresUI.cs",
               "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Forms\\PagosMasivosProveedoresUI.cs",
               "RelativeDocumentMoniker": "BPP\\Forms\\PagosMasivosProveedoresUI.cs",
               "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Forms\\PagosMasivosProveedoresUI.cs",
               "RelativeToolTip": "BPP\\Forms\\PagosMasivosProveedoresUI.cs",
-              "ViewState": "AQIAACYAAAAAAAAAAAAiwEcAAAAbAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEcAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T23:52:41.761Z"
+              "WhenOpened": "2024-06-25T23:52:41.761Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "PagosMasivosProveedoresMenuEvent.cs",
-              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\MenuEvent\\BPP_UI\\PagosMasivosProveedoresMenuEvent.cs",
-              "RelativeDocumentMoniker": "BPP\\Events\\MenuEvent\\BPP_UI\\PagosMasivosProveedoresMenuEvent.cs",
-              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Events\\MenuEvent\\BPP_UI\\PagosMasivosProveedoresMenuEvent.cs",
-              "RelativeToolTip": "BPP\\Events\\MenuEvent\\BPP_UI\\PagosMasivosProveedoresMenuEvent.cs",
-              "ViewState": "AQIAAFUAAAAAAAAAAAAQwF0AAAAdAAAA",
+              "DocumentIndex": 7,
+              "Title": "Global.cs",
+              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Util\\Global.cs",
+              "RelativeDocumentMoniker": "BPP\\Util\\Global.cs",
+              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\Util\\Global.cs",
+              "RelativeToolTip": "BPP\\Util\\Global.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T23:51:40.654Z"
+              "WhenOpened": "2024-06-26T00:03:34.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SAPInit.cs",
+              "DocumentMoniker": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\SAPInit.cs",
+              "RelativeDocumentMoniker": "BPP\\SAPInit.cs",
+              "ToolTip": "D:\\SEBAS\\ADP\\STR_Addon_PagoMasivoDetracciones-main\\BPP\\SAPInit.cs",
+              "RelativeToolTip": "BPP\\SAPInit.cs",
+              "ViewState": "AQIAAEkAAAAAAAAAAAAwwFgAAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-26T00:07:27.573Z",
+              "EditorCaption": ""
             }
           ]
         },

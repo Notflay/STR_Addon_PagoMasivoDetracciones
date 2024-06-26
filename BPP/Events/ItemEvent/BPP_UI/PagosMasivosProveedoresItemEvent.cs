@@ -615,6 +615,8 @@ namespace BPP
                 string text2 = ((dynamic)oForm.Items.Item("txtPagodet").Specific).Value;
                 string text3 = ((dynamic)oForm.Items.Item("0_U_E").Specific).Value;
                 string s = ((dynamic)oForm.Items.Item("txtFeceje").Specific).Value;
+                Global.WriteToFile(text + "\n" + transferAccount + "\n" + text2 + "\n" + text3 + "\n" + s);
+
                 DBDataSource dBDataSource = oForm.DataSources.DBDataSources.Item("@BPP_PAGM_DET1");
                 List<string> list = new List<string>();
                 if (text2.Equals("") && SAPMain.opcionPagoMasivo == 1)
@@ -648,6 +650,7 @@ namespace BPP
                         payments.CardCode = cardCode;
                         payments.CardName = cardName;
                         payments.UserFields.Fields.Item("U_BPP_NUMPAGO").Value = text2;
+                        Global.WriteToFile(transferAccount);
                         payments.TransferAccount = transferAccount;
                         payments.TransferReference = text2;
                         payments.TransferDate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
