@@ -63,7 +63,6 @@ C:\Users\LENOVO\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Debug\
 D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Imgs\logo_empresa_1.png
 D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Menus\Menu.xml
 D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Localizacion\frmCtaDestino.srf
-D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Localizacion\frmDetracciones.srf
 D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Localizacion\frmPagos.srf
 D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Localizacion\frmParam1.srf
 D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x86\Debug\Resources\Imgs\boton_archivo_1.png

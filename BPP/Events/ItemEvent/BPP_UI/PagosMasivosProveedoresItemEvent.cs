@@ -654,9 +654,14 @@ namespace BPP
                         payments.TransferAccount = transferAccount;
                         payments.TransferReference = text2;
                         payments.TransferDate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
-                        payments.PrimaryFormItems.PaymentMeans = PaymentMeansTypeEnum.pmtBankTransfer;
+                       
+
                         string value = dBDataSource.GetValue("U_BPP_FLJCAJ", i).ToString();
-                        payments.PrimaryFormItems.CashFlowLineItemID = ((!string.IsNullOrEmpty(value)) ? Convert.ToInt32(value) : 0);
+                        if (!string.IsNullOrEmpty(value))
+                        {
+                            payments.PrimaryFormItems.PaymentMeans = PaymentMeansTypeEnum.pmtBankTransfer;
+                            payments.PrimaryFormItems.CashFlowLineItemID = ((!string.IsNullOrEmpty(value)) ? Convert.ToInt32(value) : 0);
+                        }
                         payments.Invoices.DocEntry = int.Parse(s2);
                         string text7 = text6;
                         string text8 = text7;
