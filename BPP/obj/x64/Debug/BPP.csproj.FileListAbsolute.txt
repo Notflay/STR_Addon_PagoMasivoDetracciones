@@ -292,6 +292,6 @@ D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x64\Debug\Resources\I
 D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x64\Debug\Resources\Imgs\boton_procesar_1.png
 D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x64\Debug\BPP.pdb
 D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x64\Debug\BPP.pdb
-D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x64\Debug\BPP.dll.config
-D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x64\Debug\BPP.dll
-D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x64\Debug\BPP.dll
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x64\Debug\BPP.exe.config
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\bin\x64\Debug\BPP.exe
+D:\SEBAS\ADP\STR_Addon_PagoMasivoDetracciones-main\BPP\obj\x64\Debug\BPP.exe

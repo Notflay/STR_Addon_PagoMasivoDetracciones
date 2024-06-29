@@ -657,7 +657,7 @@ namespace BPP
                        
 
                         string value = dBDataSource.GetValue("U_BPP_FLJCAJ", i).ToString();
-                        if (!string.IsNullOrEmpty(value))
+                        if (!string.IsNullOrEmpty(value) && value != "---")
                         {
                             payments.PrimaryFormItems.PaymentMeans = PaymentMeansTypeEnum.pmtBankTransfer;
                             payments.PrimaryFormItems.CashFlowLineItemID = ((!string.IsNullOrEmpty(value)) ? Convert.ToInt32(value) : 0);
