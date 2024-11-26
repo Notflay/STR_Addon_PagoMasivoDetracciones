@@ -71,6 +71,8 @@ namespace BPP
                 SAPMain.opcionPagoMasivo = Convert.ToInt32((dynamic)recordset.Fields.Item("U_STR_NUMOPERTXT").Value);
                 SAPMain.segmentado = GetSegmento();
                 SAPMain.separador = ((dynamic)recordset.Fields.Item("U_BPP_SEPRDR").Value).ToString();
+                SAPMain.pgmAgrp = string.IsNullOrWhiteSpace(((dynamic)recordset.Fields.Item("U_BPP_PGMAGRP").Value).ToString()) ? false : 
+                    ((dynamic)recordset.Fields.Item("U_BPP_PGMAGRP").Value).ToString() == "Y";
             }
             catch (Exception)
             {

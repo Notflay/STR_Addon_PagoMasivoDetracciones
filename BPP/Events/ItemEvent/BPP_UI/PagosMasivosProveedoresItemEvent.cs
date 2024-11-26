@@ -165,7 +165,7 @@ namespace BPP
                             {
                                 BubbleEvent = false;
                             }
-                            else if (generarAsientos())
+                            else if (SAPMain.pgmAgrp ? generarAsientosAgrupado() : generarAsientosSinAgrupar())
                             {
                                 oForm.Mode = BoFormMode.fm_ADD_MODE;
                             }
@@ -691,7 +691,7 @@ namespace BPP
             }
         }
         // Generar Asientos
-        private bool generarAsientos()
+        private bool generarAsientosAgrupado()
         {
             try
             {
@@ -705,6 +705,12 @@ namespace BPP
                 // Global.WriteToFile(text + "\n" + transferAccount + "\n" + text2 + "\n" + text3 + "\n" + s);
 
                 DBDataSource dBDataSource = oForm.DataSources.DBDataSources.Item("@BPP_PAGM_DET1");
+
+                if (text2.Equals("") && SAPMain.opcionPagoMasivo == 1)
+                {
+                    SAPMain.MensajeError("Debe ingresar un numero de operación.", estado: true);
+                    return false;
+                }
 
                 // Agrupar por proveedor (CardCode)
                 var pagosPorProveedor = new Dictionary<string, List<int>>();
@@ -828,144 +834,142 @@ namespace BPP
                 return false;
             }
         }
+        private bool generarAsientosSinAgrupar()
+        {
+            try
+            {
+                Recordset recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+                Payments payments = null;
+                Matrix matrix = (Matrix)(dynamic)oForm.Items.Item("matDet1").Specific;
+                string text = ((dynamic)oForm.Items.Item("txtFeccrea").Specific).Value;
+                string transferAccount = obtieneCuenta(((dynamic)oForm.Items.Item("txtCuencon").Specific).Value, true).Replace(" ", string.Empty);
+                string text2 = ((dynamic)oForm.Items.Item("txtPagodet").Specific).Value;
+                string text3 = ((dynamic)oForm.Items.Item("0_U_E").Specific).Value;
+                string s = ((dynamic)oForm.Items.Item("txtFeceje").Specific).Value;
+                Global.WriteToFile(text + "\n" + transferAccount + "\n" + text2 + "\n" + text3 + "\n" + s);
 
-        //private bool generarAsientos()
-        //{
-        //    try
-        //    {
-        //        Recordset recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
-        //        JournalEntries journalEntries = null;
-        //        Payments payments = null;
-        //        Matrix matrix = (Matrix)(dynamic)oForm.Items.Item("matDet1").Specific;
-        //        string text = ((dynamic)oForm.Items.Item("txtFeccrea").Specific).Value;
-        //        string transferAccount = obtieneCuenta(((dynamic)oForm.Items.Item("txtCuencon").Specific).Value, true).Replace(" ", string.Empty);
-        //        string text2 = ((dynamic)oForm.Items.Item("txtPagodet").Specific).Value;
-        //        string text3 = ((dynamic)oForm.Items.Item("0_U_E").Specific).Value;
-        //        string s = ((dynamic)oForm.Items.Item("txtFeceje").Specific).Value;
-        //        Global.WriteToFile(text + "\n" + transferAccount + "\n" + text2 + "\n" + text3 + "\n" + s);
+                DBDataSource dBDataSource = oForm.DataSources.DBDataSources.Item("@BPP_PAGM_DET1");
+                List<string> list = new List<string>();
+                if (text2.Equals("") && SAPMain.opcionPagoMasivo == 1)
+                {
+                    SAPMain.MensajeError("Debe ingresar un numero de operación.", estado: true);
+                }
+                else
+                {
+                    if (!SAPMain.oCompany.InTransaction)
+                    {
+                        SAPMain.oCompany.StartTransaction();
+                    }
 
-        //        DBDataSource dBDataSource = oForm.DataSources.DBDataSources.Item("@BPP_PAGM_DET1");
-        //        List<string> list = new List<string>();
-        //        if (text2.Equals("") && SAPMain.opcionPagoMasivo == 1)
-        //        {
-        //            SAPMain.MensajeError("Debe ingresar un numero de operación.", estado: true);
-        //        }
-        //        else
-        //        {
-        //            if (!SAPMain.oCompany.InTransaction)
-        //            {
-        //                SAPMain.oCompany.StartTransaction();
-        //            }
-
-        //            SAPMain.MensajeAdvertencia("Creando las Pagos. Espere por favor...");
-        //            for (int i = 0; i < dBDataSource.Size; i++)
-        //            {
-        //                string text4 = dBDataSource.GetValue("LineId", i).ToString().Trim();
-        //                string s2 = dBDataSource.GetValue("U_BPP_NUMSAP", i).ToString().Trim();
-        //                string cardCode = dBDataSource.GetValue("U_BPP_CODPROV", i).ToString().Trim();
-        //                string cardName = dBDataSource.GetValue("U_BPP_NOMPROV", i).ToString().Trim();
-        //                double num = double.Parse(dBDataSource.GetValue("U_BPP_MONTOPAG", i).ToString().Trim());
-        //                string text5 = dBDataSource.GetValue("U_BPP_MONEDA", i).ToString().Trim();
-        //                int installmentId = int.Parse(dBDataSource.GetValue("U_BPP_NUMCUOTA", i).ToString().Trim());
-        //                string text6 = dBDataSource.GetValue("U_BPP_OBJTYPE", i).ToString().Trim();
-        //                payments = (Payments)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.oVendorPayments);
-        //                payments.DocType = BoRcptTypes.rSupplier;
-        //                payments.DocDate = DateTime.ParseExact(s, "yyyyMMdd", null);
-        //                payments.TaxDate = DateTime.ParseExact(s, "yyyyMMdd", null);
-        //                payments.DueDate = DateTime.ParseExact(s, "yyyyMMdd", null);
-        //                payments.JournalRemarks = "Pago Masivos Nro. " + text3;
-        //                payments.CardCode = cardCode;
-        //                payments.CardName = cardName;
-        //                payments.UserFields.Fields.Item("U_BPP_NUMPAGO").Value = text2;
-        //                //  Global.WriteToFile(transferAccount.Replace(" ", string.Empty));
-        //                payments.TransferAccount = transferAccount;
-        //                payments.TransferReference = text2;
-        //                payments.TransferDate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
+                    SAPMain.MensajeAdvertencia("Creando las Pagos. Espere por favor...");
+                    for (int i = 0; i < dBDataSource.Size; i++)
+                    {
+                        string text4 = dBDataSource.GetValue("LineId", i).ToString().Trim();
+                        string s2 = dBDataSource.GetValue("U_BPP_NUMSAP", i).ToString().Trim();
+                        string cardCode = dBDataSource.GetValue("U_BPP_CODPROV", i).ToString().Trim();
+                        string cardName = dBDataSource.GetValue("U_BPP_NOMPROV", i).ToString().Trim();
+                        double num = double.Parse(dBDataSource.GetValue("U_BPP_MONTOPAG", i).ToString().Trim());
+                        string text5 = dBDataSource.GetValue("U_BPP_MONEDA", i).ToString().Trim();
+                        int installmentId = int.Parse(dBDataSource.GetValue("U_BPP_NUMCUOTA", i).ToString().Trim());
+                        string text6 = dBDataSource.GetValue("U_BPP_OBJTYPE", i).ToString().Trim();
+                        payments = (Payments)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.oVendorPayments);
+                        payments.DocType = BoRcptTypes.rSupplier;
+                        payments.DocDate = DateTime.ParseExact(s, "yyyyMMdd", null);
+                        payments.TaxDate = DateTime.ParseExact(s, "yyyyMMdd", null);
+                        payments.DueDate = DateTime.ParseExact(s, "yyyyMMdd", null);
+                        payments.JournalRemarks = "Pago Masivos Nro. " + text3;
+                        payments.CardCode = cardCode;
+                        payments.CardName = cardName;
+                        payments.UserFields.Fields.Item("U_BPP_NUMPAGO").Value = text2;
+                        Global.WriteToFile(transferAccount.Replace(" ", string.Empty));
+                        payments.TransferAccount = transferAccount;
+                        payments.TransferReference = text2;
+                        payments.TransferDate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
 
 
-        //                string value = dBDataSource.GetValue("U_BPP_FLJCAJ", i).ToString();
-        //                if (!string.IsNullOrEmpty(value) && value != "---")
-        //                {
-        //                    payments.PrimaryFormItems.PaymentMeans = PaymentMeansTypeEnum.pmtBankTransfer;
-        //                    payments.PrimaryFormItems.CashFlowLineItemID = ((!string.IsNullOrEmpty(value)) ? Convert.ToInt32(value) : 0);
-        //                }
-        //                payments.Invoices.DocEntry = int.Parse(s2);
-        //                string text7 = text6;
-        //                string text8 = text7;
-        //                if (!(text8 == "18"))
-        //                {
-        //                    if (text8 == "204")
-        //                    {
-        //                        payments.Invoices.InvoiceType = BoRcptInvTypes.it_PurchaseDownPayment;
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    payments.Invoices.InvoiceType = BoRcptInvTypes.it_PurchaseInvoice;
-        //                }
+                        string value = dBDataSource.GetValue("U_BPP_FLJCAJ", i).ToString();
+                        if (!string.IsNullOrEmpty(value) && value != "---")
+                        {
+                            payments.PrimaryFormItems.PaymentMeans = PaymentMeansTypeEnum.pmtBankTransfer;
+                            payments.PrimaryFormItems.CashFlowLineItemID = ((!string.IsNullOrEmpty(value)) ? Convert.ToInt32(value) : 0);
+                        }
+                        payments.Invoices.DocEntry = int.Parse(s2);
+                        string text7 = text6;
+                        string text8 = text7;
+                        if (!(text8 == "18"))
+                        {
+                            if (text8 == "204")
+                            {
+                                payments.Invoices.InvoiceType = BoRcptInvTypes.it_PurchaseDownPayment;
+                            }
+                        }
+                        else
+                        {
+                            payments.Invoices.InvoiceType = BoRcptInvTypes.it_PurchaseInvoice;
+                        }
 
-        //                if (text5 == "SOL")
-        //                {
-        //                    payments.Invoices.SumApplied = num;
-        //                }
-        //                else
-        //                {
-        //                    payments.Invoices.AppliedFC = num;
-        //                }
+                        if (text5 == "SOL")
+                        {
+                            payments.Invoices.SumApplied = num;
+                        }
+                        else
+                        {
+                            payments.Invoices.AppliedFC = num;
+                        }
 
-        //                payments.DocCurrency = text5;
-        //                payments.TransferSum = num;
-        //                payments.Invoices.InstallmentId = installmentId;
-        //                if (payments.Add() != 0)
-        //                {
-        //                    if (SAPMain.oCompany.InTransaction)
-        //                    {
-        //                        SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
-        //                    }
+                        payments.DocCurrency = text5;
+                        payments.TransferSum = num;
+                        payments.Invoices.InstallmentId = installmentId;
+                        if (payments.Add() != 0)
+                        {
+                            if (SAPMain.oCompany.InTransaction)
+                            {
+                                SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
+                            }
 
-        //                    string mensaje = $"{SAPMain.oCompany.GetLastErrorCode()}-{SAPMain.oCompany.GetLastErrorDescription()}";
-        //                    SAPMain.MensajeError(mensaje, estado: true);
-        //                    return false;
-        //                }
+                            string mensaje = $"{SAPMain.oCompany.GetLastErrorCode()}-{SAPMain.oCompany.GetLastErrorDescription()}";
+                            SAPMain.MensajeError(mensaje, estado: true);
+                            return false;
+                        }
 
-        //                string newObjectKey = SAPMain.oCompany.GetNewObjectKey();
-        //                list.Add(newObjectKey + "|" + text4);
-        //            }
+                        string newObjectKey = SAPMain.oCompany.GetNewObjectKey();
+                        list.Add(newObjectKey + "|" + text4);
+                    }
 
-        //            matrix.LoadFromDataSource();
-        //            if (SAPMain.oCompany.InTransaction)
-        //            {
-        //                SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_Commit);
-        //                recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
-        //                string text9 = $"UPDATE \"@BPP_PAGM_CAB\" SET  U_BPP_ESTADO = 'Procesado' WHERE \"DocEntry\"  = {text3} ";
-        //                Global.WriteToFile(text9);
-        //                recordset.DoQuery(text9);
-        //                for (int j = 0; j < list.Count; j++)
-        //                {
-        //                    string[] array = list[j].Split('|');
-        //                    text9 = string.Format("UPDATE \"@BPP_PAGM_DET1\" SET \"U_BPP_PAGO\" = " + array[0] + " WHERE \"DocEntry\" = " + text3 + " AND \"LineId\" = " + array[1]);
-        //                    Global.WriteToFile(text9);
-        //                    recordset.DoQuery(text9);
-        //                }
+                    matrix.LoadFromDataSource();
+                    if (SAPMain.oCompany.InTransaction)
+                    {
+                        SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_Commit);
+                        recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+                        string text9 = $"UPDATE \"@BPP_PAGM_CAB\" SET  U_BPP_ESTADO = 'Procesado' WHERE \"DocEntry\"  = {text3} ";
+                        Global.WriteToFile(text9);
+                        recordset.DoQuery(text9);
+                        for (int j = 0; j < list.Count; j++)
+                        {
+                            string[] array = list[j].Split('|');
+                            text9 = string.Format("UPDATE \"@BPP_PAGM_DET1\" SET \"U_BPP_PAGO\" = " + array[0] + " WHERE \"DocEntry\" = " + text3 + " AND \"LineId\" = " + array[1]);
+                            Global.WriteToFile(text9);
+                            recordset.DoQuery(text9);
+                        }
 
-        //                actualizarNumeroSunat(text2);
-        //                return true;
-        //            }
-        //        }
+                        actualizarNumeroSunat(text2);
+                        return true;
+                    }
+                }
 
-        //        return false;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Global.WriteToFile(ex.Message.ToString());
-        //        if (SAPMain.oCompany.InTransaction)
-        //        {
-        //            SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
-        //            SAPMain.MensajeError(ex.Message, estado: true);
-        //        }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Global.WriteToFile(ex.Message.ToString());
+                if (SAPMain.oCompany.InTransaction)
+                {
+                    SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
+                    SAPMain.MensajeError(ex.Message, estado: true);
+                }
 
-        //        return false;
-        //    }
-        //}
+                return false;
+            }
+        }
     }
 }

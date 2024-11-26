@@ -18,6 +18,7 @@ namespace BPP
         public static string codTransaccionDestino = null;
         public static int opcionPagoMasivo = 1;
         public static string separador = null;
+        public static bool pgmAgrp = false;
 
         public static string cuentaContraPartida = null;
         public static bool segmentado;

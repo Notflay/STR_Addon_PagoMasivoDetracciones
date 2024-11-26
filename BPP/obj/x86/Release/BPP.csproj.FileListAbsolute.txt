@@ -1,0 +1,17 @@
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Release\Resources\Imgs\logo_empresa_1.png
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Release\Menus\Menu.xml
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Release\Resources\Localizacion\frmCtaDestino.srf
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Release\Resources\Localizacion\frmPagos.srf
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Release\Resources\Localizacion\frmParam1.srf
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Release\Resources\Imgs\boton_archivo_1.png
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Release\Resources\Imgs\boton_procesar_1.png
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Release\BPP.dll.config
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\bin\x86\Release\BPP.dll
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Release\BPP.csproj.AssemblyReference.cache
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Release\Interop.SAPbobsCOM.dll
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Release\Interop.SAPbouiCOM.dll
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Release\BPP.csproj.ResolveComReference.cache
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Release\BPP.Properties.Resources.resources
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Release\BPP.csproj.GenerateResource.cache
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Release\BPP.csproj.CoreCompileInputs.cache
+E:\Repos\source\repos\STR_Addon_PagoMasivoDetracciones\BPP\obj\x86\Release\BPP.dll
