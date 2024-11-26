@@ -17,7 +17,7 @@ namespace BPP
     {
         private SAPbouiCOM.Form oForm;
         //private static readonly ILog logger = LogManager.GetLogger(typeof(PagosMasivosProveedoresItemEvent));
-
+        private bool fieldsDisabled = false; // Variable para rastrear si los campos están deshabilitados
         public void itemAction(string FormUID, ref ItemEvent pVal, out bool BubbleEvent)
         {
             BubbleEvent = true;
@@ -58,17 +58,25 @@ namespace BPP
 
                             break;
                         case BoEventTypes.et_ITEM_PRESSED:
-                            if (pVal.ItemUID == "btncom" && pVal.FormMode != 1 && pVal.FormMode != 2 && pVal.FormMode != 3)
+                            if ((pVal.ItemUID == "txtFeceje" && pVal.FormMode == 2) || (pVal.ItemUID == "txtFeceje" && pVal.FormMode == 1) ||  (pVal.ItemUID == "1" && pVal.FormMode == 1))
                             {
-                            }
-
+                                DisableFields();
+                            }                              
                             break;
+                        case BoEventTypes.et_CLICK:
+                            if (pVal.ItemUID == "matDet1" && pVal.ColUID == "colCheck")
+                            {
+                                setearTotal();
+                            }
+                            break;
+                
                         case BoEventTypes.et_VALIDATE:
                             if ((pVal.ItemUID == "matDet1" || pVal.ItemUID == "matDet2") && pVal.ColUID == "colMonpag" && pVal.ItemChanged && (pVal.FormMode == 3 || pVal.FormMode == 2))
                             {
                                 try
                                 {
-                                    calcularTotal(ref pVal);
+                                    //  calcularTotal(ref pVal);
+                                    setearTotal();
                                     break;
                                 }
                                 catch (Exception ex)
@@ -86,6 +94,8 @@ namespace BPP
 
                 switch (pVal.EventType)
                 {
+
+
                     case BoEventTypes.et_MATRIX_LINK_PRESSED:
                         if ((pVal.ItemUID == "matDet1" || pVal.ItemUID == "matDet2") && pVal.ColUID == "colNumsap")
                         {
@@ -94,16 +104,17 @@ namespace BPP
 
                         break;
                     case BoEventTypes.et_KEY_DOWN:
-                        if (pVal.ItemUID == "txtPagodet" && ((dynamic)oForm.Items.Item("22_U_E").Specific).Value == "Procesado")
+                        if (pVal.ItemUID == "txtPagodet" &&  pVal.FormMode == 2)
                         {
-                            Matrix matrix3 = (Matrix)(dynamic)oForm.Items.Item("matDet1").Specific;
-                            matrix3.Columns.Item("colCheck").Editable = false;
-                            matrix3.Columns.Item("colMonpag").Editable = false;
-                            Item item = oForm.Items.Item("btnConsult");
-                            item.Enabled = false;
+                            if (!fieldsDisabled)
+                            {
+                                DisableFields();  // Deshabilitar campos solo si no están ya deshabilitados
+                                fieldsDisabled = true; // Marcar los campos como deshabilitados
+                            }
                         }
 
                         break;
+
                     case BoEventTypes.et_ITEM_PRESSED:
                         if (pVal.ItemUID == "btnConsult" && pVal.FormMode == 3)
                         {
@@ -164,6 +175,17 @@ namespace BPP
                             }
                         }
 
+                        if ((pVal.ItemUID == "txtFeceje" && pVal.FormMode == 2) || (pVal.ItemUID == "txtFeceje" && pVal.FormMode == 1) || (pVal.ItemUID == "1" && pVal.FormMode == 2))
+
+                        {
+                            Item item = oForm.Items.Item("22_U_E");
+                            ComboBox comboBox = (ComboBox)(dynamic)item.Specific;
+                            if (comboBox.Value == "Creado" || comboBox.Value == "Procesado" || comboBox.Value == "Cancelado")
+                            {
+                                oForm.Freeze(true);
+                            }
+                        }
+
                         if (pVal.ItemUID == "1" && pVal.FormMode == 2)
                         {
                             actualizarNumeroSunat();
@@ -181,6 +203,71 @@ namespace BPP
             {
                 Global.WriteToFile(ex2.Message.ToString());
                 SAPMain.MensajeError(ex2.Message.ToString(), estado: true);
+            }
+        }
+        private void DisableFields()
+        {
+            try
+            {
+                Item item = oForm.Items.Item("22_U_E");
+                ComboBox comboBox = (ComboBox)(dynamic)item.Specific;
+                if (comboBox.Value == "Creado" || comboBox.Value == "Procesado" || comboBox.Value == "Cancelado")
+                {
+                    //  oForm.Freeze(true);
+
+                                List<string> itemsToDisable = new List<string>
+                    {
+                        "txtFecini", "txtFecfin", "txtFecvini", "txtFecvfin", "txtCodprov",
+                        "cbxFiltro", "edtFiltval", "cbxFljCj", "22_U_E", "0_U_E", "txtSerie",
+                        "txtFeccrea", "btnConsult", "txtCuenban", "cmbTippago", "matDet1"
+                    };
+
+                                foreach (var itemId in itemsToDisable)
+                                {
+                                    item = oForm.Items.Item(itemId);
+                                    item.Enabled = false;
+                                }
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.WriteToFile(ex.Message);
+            }
+            finally
+            {
+                oForm.Freeze(false);
+            }
+        }
+
+        private void setearTotal()
+        {
+            try
+            {
+                Matrix oMatrix = (Matrix)oForm.Items.Item("matDet1").Specific;
+                double total = 0.0;
+
+                // Pre-obtener referencia a columnas para evitar buscarlas en cada iteración
+                var colCheck = oMatrix.Columns.Item("colCheck");
+                var colMonpag = oMatrix.Columns.Item("colMonpag");
+
+                for (int i = 1; i <= oMatrix.RowCount; i++) // Ajuste para comenzar desde 1, que es el índice inicial en UI API
+                {
+                    CheckBox checkBox = (CheckBox)colCheck.Cells.Item(i).Specific;
+                    if (checkBox.Checked)
+                    {
+                        EditText oColTotal = (EditText)colMonpag.Cells.Item(i).Specific;
+                        if (double.TryParse(oColTotal.Value, out double value))
+                        {
+                            total += value;
+                        }
+                    }
+                }
+
+                oForm.Items.Item("txtTotdet").Specific.Value = total.ToString("F2"); // Formatear para dos decimales si es necesario
+            }
+            catch (Exception ex)
+            {
+                Global.WriteToFile($"setearTotal - {ex.Message}");
             }
         }
         private void setearLinkDocumentos(int fila)
@@ -250,7 +337,7 @@ namespace BPP
                     else
                     {
                         j = 1;
-                        total = total + double.Parse(oMatrix.Columns.Item("colSaldo").Cells.Item(i).Specific.Value);
+                        total = total + double.Parse(oMatrix.Columns.Item("colMonpag").Cells.Item(i).Specific.Value);
                     }
                 }
                 oForm.Freeze(false);
@@ -415,6 +502,7 @@ namespace BPP
             Recordset recordset2 = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
             string text5 = codigo.Replace("0", string.Empty);
             string empty5 = string.Empty;
+            string ls_separador = string.IsNullOrWhiteSpace(SAPMain.separador) ? "@" : SAPMain.separador;
             switch (text5)
             {
                 case "2":
@@ -453,7 +541,7 @@ namespace BPP
                 {
                     string empty6 = string.Empty;
                     empty6 = (dynamic)recordset.Fields.Item(0).Value;
-                    empty6 = empty6.Replace("@", string.Empty);
+                    empty6 = empty6.Replace(ls_separador, string.Empty);
                     text += empty6;
                     text += "\n";
                 }
@@ -468,7 +556,7 @@ namespace BPP
                     {
                         string empty7 = string.Empty;
                         empty7 = ((dynamic)recordset2.Fields.Item(0).Value).ToString();
-                        empty7 = empty7.Replace("@", string.Empty);
+                        empty7 = empty7.Replace(ls_separador, string.Empty);
                         text += empty7;
                         text += "\n";
                         recordset2.MoveNext();
@@ -602,79 +690,78 @@ namespace BPP
                 oRecordSet = null;
             }
         }
+        // Generar Asientos
         private bool generarAsientos()
         {
             try
             {
                 Recordset recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
-                JournalEntries journalEntries = null;
-                Payments payments = null;
                 Matrix matrix = (Matrix)(dynamic)oForm.Items.Item("matDet1").Specific;
                 string text = ((dynamic)oForm.Items.Item("txtFeccrea").Specific).Value;
-                string transferAccount = obtieneCuenta(((dynamic)oForm.Items.Item("txtCuencon").Specific).Value, true);
+                string transferAccount = obtieneCuenta(((dynamic)oForm.Items.Item("txtCuencon").Specific).Value, true).Replace(" ", string.Empty);
                 string text2 = ((dynamic)oForm.Items.Item("txtPagodet").Specific).Value;
                 string text3 = ((dynamic)oForm.Items.Item("0_U_E").Specific).Value;
                 string s = ((dynamic)oForm.Items.Item("txtFeceje").Specific).Value;
-                Global.WriteToFile(text + "\n" + transferAccount + "\n" + text2 + "\n" + text3 + "\n" + s);
+                // Global.WriteToFile(text + "\n" + transferAccount + "\n" + text2 + "\n" + text3 + "\n" + s);
 
                 DBDataSource dBDataSource = oForm.DataSources.DBDataSources.Item("@BPP_PAGM_DET1");
-                List<string> list = new List<string>();
-                if (text2.Equals("") && SAPMain.opcionPagoMasivo == 1)
+
+                // Agrupar por proveedor (CardCode)
+                var pagosPorProveedor = new Dictionary<string, List<int>>();
+
+                for (int i = 0; i < dBDataSource.Size; i++)
                 {
-                    SAPMain.MensajeError("Debe ingresar un numero de operación.", estado: true);
-                }
-                else
-                {
-                    if (!SAPMain.oCompany.InTransaction)
+                    string cardCode = dBDataSource.GetValue("U_BPP_CODPROV", i).ToString().Trim();
+                    int docEntry = int.Parse(dBDataSource.GetValue("U_BPP_NUMSAP", i).ToString().Trim());
+
+                    if (!pagosPorProveedor.ContainsKey(cardCode))
                     {
-                        SAPMain.oCompany.StartTransaction();
+                        pagosPorProveedor[cardCode] = new List<int>();
                     }
 
-                    SAPMain.MensajeAdvertencia("Creando las Pagos. Espere por favor...");
-                    for (int i = 0; i < dBDataSource.Size; i++)
-                    {
-                        string text4 = dBDataSource.GetValue("LineId", i).ToString().Trim();
-                        string s2 = dBDataSource.GetValue("U_BPP_NUMSAP", i).ToString().Trim();
-                        string cardCode = dBDataSource.GetValue("U_BPP_CODPROV", i).ToString().Trim();
-                        string cardName = dBDataSource.GetValue("U_BPP_NOMPROV", i).ToString().Trim();
-                        double num = double.Parse(dBDataSource.GetValue("U_BPP_MONTOPAG", i).ToString().Trim());
-                        string text5 = dBDataSource.GetValue("U_BPP_MONEDA", i).ToString().Trim();
-                        int installmentId = int.Parse(dBDataSource.GetValue("U_BPP_NUMCUOTA", i).ToString().Trim());
-                        string text6 = dBDataSource.GetValue("U_BPP_OBJTYPE", i).ToString().Trim();
-                        payments = (Payments)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.oVendorPayments);
-                        payments.DocType = BoRcptTypes.rSupplier;
-                        payments.DocDate = DateTime.ParseExact(s, "yyyyMMdd", null);
-                        payments.TaxDate = DateTime.ParseExact(s, "yyyyMMdd", null);
-                        payments.DueDate = DateTime.ParseExact(s, "yyyyMMdd", null);
-                        payments.JournalRemarks = "Pago Masivos Nro. " + text3;
-                        payments.CardCode = cardCode;
-                        payments.CardName = cardName;
-                        payments.UserFields.Fields.Item("U_BPP_NUMPAGO").Value = text2;
-                        Global.WriteToFile(transferAccount);
-                        payments.TransferAccount = transferAccount;
-                        payments.TransferReference = text2;
-                        payments.TransferDate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
-                       
+                    pagosPorProveedor[cardCode].Add(i);
+                }
 
-                        string value = dBDataSource.GetValue("U_BPP_FLJCAJ", i).ToString();
-                        if (!string.IsNullOrEmpty(value) && value != "---")
-                        {
-                            payments.PrimaryFormItems.PaymentMeans = PaymentMeansTypeEnum.pmtBankTransfer;
-                            payments.PrimaryFormItems.CashFlowLineItemID = ((!string.IsNullOrEmpty(value)) ? Convert.ToInt32(value) : 0);
-                        }
+                // Crear pagos por cada proveedor
+                foreach (var proveedor in pagosPorProveedor)
+                {
+                    string cardCode = proveedor.Key;
+                    List<int> lineas = proveedor.Value;
+
+                    // Crear un nuevo objeto de pago
+                    Payments payments = (Payments)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.oVendorPayments);
+                    payments.DocType = BoRcptTypes.rSupplier;
+                    payments.DocDate = DateTime.ParseExact(s, "yyyyMMdd", null);
+                    payments.TaxDate = DateTime.ParseExact(s, "yyyyMMdd", null);
+                    payments.DueDate = DateTime.ParseExact(s, "yyyyMMdd", null);
+                    payments.JournalRemarks = "Pago Masivo Nro. " + text3;
+                    payments.CardCode = cardCode;
+                    payments.UserFields.Fields.Item("U_BPP_NUMPAGO").Value = text2;
+                    payments.TransferAccount = transferAccount;
+                    payments.TransferReference = text2;
+                    payments.TransferDate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
+
+                    double totalPago = 0;
+
+                    foreach (int i in lineas)
+                    {
+                        string text5 = dBDataSource.GetValue("U_BPP_MONEDA", i).ToString().Trim();
+                        double num = double.Parse(dBDataSource.GetValue("U_BPP_MONTOPAG", i).ToString().Trim());
+                        string s2 = dBDataSource.GetValue("U_BPP_NUMSAP", i).ToString().Trim();
+                        string text6 = dBDataSource.GetValue("U_BPP_OBJTYPE", i).ToString().Trim();
+                        int installmentId = int.Parse(dBDataSource.GetValue("U_BPP_NUMCUOTA", i).ToString().Trim());
+
+                        // Añadir cada factura al pago
                         payments.Invoices.DocEntry = int.Parse(s2);
-                        string text7 = text6;
-                        string text8 = text7;
-                        if (!(text8 == "18"))
-                        {
-                            if (text8 == "204")
-                            {
-                                payments.Invoices.InvoiceType = BoRcptInvTypes.it_PurchaseDownPayment;
-                            }
-                        }
-                        else
+                        payments.Invoices.InstallmentId = installmentId;
+
+                        if (text6 == "18")
                         {
                             payments.Invoices.InvoiceType = BoRcptInvTypes.it_PurchaseInvoice;
+                        }
+                        else if (text6 == "204")
+                        {
+                            payments.Invoices.InvoiceType = BoRcptInvTypes.it_PurchaseDownPayment;
                         }
 
                         if (text5 == "SOL")
@@ -686,47 +773,49 @@ namespace BPP
                             payments.Invoices.AppliedFC = num;
                         }
 
-                        payments.DocCurrency = text5;
-                        payments.TransferSum = num;
-                        payments.Invoices.InstallmentId = installmentId;
-                        if (payments.Add() != 0)
-                        {
-                            if (SAPMain.oCompany.InTransaction)
-                            {
-                                SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
-                            }
-
-                            string mensaje = $"{SAPMain.oCompany.GetLastErrorCode()}-{SAPMain.oCompany.GetLastErrorDescription()}";
-                            SAPMain.MensajeError(mensaje, estado: true);
-                            return false;
-                        }
-
-                        string newObjectKey = SAPMain.oCompany.GetNewObjectKey();
-                        list.Add(newObjectKey + "|" + text4);
+                        totalPago += num;
+                        payments.Invoices.Add();
                     }
 
-                    matrix.LoadFromDataSource();
-                    if (SAPMain.oCompany.InTransaction)
+                    string value = dBDataSource.GetValue("U_BPP_FLJCAJ", lineas.FirstOrDefault()).ToString();
+
+                    if (!string.IsNullOrEmpty(value) && value != "---")
                     {
-                        SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_Commit);
-                        recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
-                        string text9 = $"UPDATE \"@BPP_PAGM_CAB\" SET  U_BPP_ESTADO = 'Procesado' WHERE \"DocEntry\"  = {text3} ";
-                        Global.WriteToFile(text9);
-                        recordset.DoQuery(text9);
-                        for (int j = 0; j < list.Count; j++)
-                        {
-                            string[] array = list[j].Split('|');
-                            text9 = string.Format("UPDATE \"@BPP_PAGM_DET1\" SET \"U_BPP_PAGO\" = " + array[0] + " WHERE \"DocEntry\" = " + text3 + " AND \"LineId\" = " + array[1]);
-                            Global.WriteToFile(text9);
-                            recordset.DoQuery(text9);
-                        }
-
-                        actualizarNumeroSunat(text2);
-                        return true;
+                        payments.PrimaryFormItems.PaymentMeans = PaymentMeansTypeEnum.pmtBankTransfer;
+                        payments.PrimaryFormItems.CashFlowLineItemID = ((!string.IsNullOrEmpty(value)) ? Convert.ToInt32(value) : 0);
                     }
+
+                    payments.DocCurrency = dBDataSource.GetValue("U_BPP_MONEDA", lineas[0]).ToString().Trim();
+                    payments.TransferSum = totalPago;
+                    // Realizar el pago
+                    if (payments.Add() != 0)
+                    {
+                        SAPMain.MensajeError($"{SAPMain.oCompany.GetLastErrorCode()} - {SAPMain.oCompany.GetLastErrorDescription()}", estado: true);
+                        SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
+                        return false;
+                    }
+
+                    string newObjectKey = SAPMain.oCompany.GetNewObjectKey();
+
+                    // Actualizar el registro con el nuevo pago y el LineId
+                    foreach (int i in lineas)
+                    {
+                        string lineId = dBDataSource.GetValue("LineId", i).ToString().Trim();
+                        string updateQuery = $"UPDATE \"@BPP_PAGM_DET1\" SET \"U_BPP_PAGO\" = {newObjectKey} WHERE \"DocEntry\" = {text3} AND \"LineId\" = {lineId}";
+                        recordset.DoQuery(updateQuery);
+                    }
+
+                    // **Actualizar el estado del registro en la cabecera**
+                    string updateCabecera = $"UPDATE \"@BPP_PAGM_CAB\" SET  U_BPP_ESTADO = 'Procesado' WHERE \"DocEntry\" = {text3}";
+                    Global.WriteToFile(updateCabecera);
+                    recordset.DoQuery(updateCabecera);
+
+                    actualizarNumeroSunat(text2);
+
+                    //Global.WriteToFile($"Pago creado con éxito: {newObjectKey}");
                 }
 
-                return false;
+                return true;
             }
             catch (Exception ex)
             {
@@ -734,11 +823,149 @@ namespace BPP
                 if (SAPMain.oCompany.InTransaction)
                 {
                     SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
-                    SAPMain.MensajeError(ex.Message, estado: true);
                 }
-
+                SAPMain.MensajeError(ex.Message, estado: true);
                 return false;
             }
         }
+
+        //private bool generarAsientos()
+        //{
+        //    try
+        //    {
+        //        Recordset recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+        //        JournalEntries journalEntries = null;
+        //        Payments payments = null;
+        //        Matrix matrix = (Matrix)(dynamic)oForm.Items.Item("matDet1").Specific;
+        //        string text = ((dynamic)oForm.Items.Item("txtFeccrea").Specific).Value;
+        //        string transferAccount = obtieneCuenta(((dynamic)oForm.Items.Item("txtCuencon").Specific).Value, true).Replace(" ", string.Empty);
+        //        string text2 = ((dynamic)oForm.Items.Item("txtPagodet").Specific).Value;
+        //        string text3 = ((dynamic)oForm.Items.Item("0_U_E").Specific).Value;
+        //        string s = ((dynamic)oForm.Items.Item("txtFeceje").Specific).Value;
+        //        Global.WriteToFile(text + "\n" + transferAccount + "\n" + text2 + "\n" + text3 + "\n" + s);
+
+        //        DBDataSource dBDataSource = oForm.DataSources.DBDataSources.Item("@BPP_PAGM_DET1");
+        //        List<string> list = new List<string>();
+        //        if (text2.Equals("") && SAPMain.opcionPagoMasivo == 1)
+        //        {
+        //            SAPMain.MensajeError("Debe ingresar un numero de operación.", estado: true);
+        //        }
+        //        else
+        //        {
+        //            if (!SAPMain.oCompany.InTransaction)
+        //            {
+        //                SAPMain.oCompany.StartTransaction();
+        //            }
+
+        //            SAPMain.MensajeAdvertencia("Creando las Pagos. Espere por favor...");
+        //            for (int i = 0; i < dBDataSource.Size; i++)
+        //            {
+        //                string text4 = dBDataSource.GetValue("LineId", i).ToString().Trim();
+        //                string s2 = dBDataSource.GetValue("U_BPP_NUMSAP", i).ToString().Trim();
+        //                string cardCode = dBDataSource.GetValue("U_BPP_CODPROV", i).ToString().Trim();
+        //                string cardName = dBDataSource.GetValue("U_BPP_NOMPROV", i).ToString().Trim();
+        //                double num = double.Parse(dBDataSource.GetValue("U_BPP_MONTOPAG", i).ToString().Trim());
+        //                string text5 = dBDataSource.GetValue("U_BPP_MONEDA", i).ToString().Trim();
+        //                int installmentId = int.Parse(dBDataSource.GetValue("U_BPP_NUMCUOTA", i).ToString().Trim());
+        //                string text6 = dBDataSource.GetValue("U_BPP_OBJTYPE", i).ToString().Trim();
+        //                payments = (Payments)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.oVendorPayments);
+        //                payments.DocType = BoRcptTypes.rSupplier;
+        //                payments.DocDate = DateTime.ParseExact(s, "yyyyMMdd", null);
+        //                payments.TaxDate = DateTime.ParseExact(s, "yyyyMMdd", null);
+        //                payments.DueDate = DateTime.ParseExact(s, "yyyyMMdd", null);
+        //                payments.JournalRemarks = "Pago Masivos Nro. " + text3;
+        //                payments.CardCode = cardCode;
+        //                payments.CardName = cardName;
+        //                payments.UserFields.Fields.Item("U_BPP_NUMPAGO").Value = text2;
+        //                //  Global.WriteToFile(transferAccount.Replace(" ", string.Empty));
+        //                payments.TransferAccount = transferAccount;
+        //                payments.TransferReference = text2;
+        //                payments.TransferDate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
+
+
+        //                string value = dBDataSource.GetValue("U_BPP_FLJCAJ", i).ToString();
+        //                if (!string.IsNullOrEmpty(value) && value != "---")
+        //                {
+        //                    payments.PrimaryFormItems.PaymentMeans = PaymentMeansTypeEnum.pmtBankTransfer;
+        //                    payments.PrimaryFormItems.CashFlowLineItemID = ((!string.IsNullOrEmpty(value)) ? Convert.ToInt32(value) : 0);
+        //                }
+        //                payments.Invoices.DocEntry = int.Parse(s2);
+        //                string text7 = text6;
+        //                string text8 = text7;
+        //                if (!(text8 == "18"))
+        //                {
+        //                    if (text8 == "204")
+        //                    {
+        //                        payments.Invoices.InvoiceType = BoRcptInvTypes.it_PurchaseDownPayment;
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    payments.Invoices.InvoiceType = BoRcptInvTypes.it_PurchaseInvoice;
+        //                }
+
+        //                if (text5 == "SOL")
+        //                {
+        //                    payments.Invoices.SumApplied = num;
+        //                }
+        //                else
+        //                {
+        //                    payments.Invoices.AppliedFC = num;
+        //                }
+
+        //                payments.DocCurrency = text5;
+        //                payments.TransferSum = num;
+        //                payments.Invoices.InstallmentId = installmentId;
+        //                if (payments.Add() != 0)
+        //                {
+        //                    if (SAPMain.oCompany.InTransaction)
+        //                    {
+        //                        SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
+        //                    }
+
+        //                    string mensaje = $"{SAPMain.oCompany.GetLastErrorCode()}-{SAPMain.oCompany.GetLastErrorDescription()}";
+        //                    SAPMain.MensajeError(mensaje, estado: true);
+        //                    return false;
+        //                }
+
+        //                string newObjectKey = SAPMain.oCompany.GetNewObjectKey();
+        //                list.Add(newObjectKey + "|" + text4);
+        //            }
+
+        //            matrix.LoadFromDataSource();
+        //            if (SAPMain.oCompany.InTransaction)
+        //            {
+        //                SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_Commit);
+        //                recordset = (Recordset)(dynamic)SAPMain.oCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+        //                string text9 = $"UPDATE \"@BPP_PAGM_CAB\" SET  U_BPP_ESTADO = 'Procesado' WHERE \"DocEntry\"  = {text3} ";
+        //                Global.WriteToFile(text9);
+        //                recordset.DoQuery(text9);
+        //                for (int j = 0; j < list.Count; j++)
+        //                {
+        //                    string[] array = list[j].Split('|');
+        //                    text9 = string.Format("UPDATE \"@BPP_PAGM_DET1\" SET \"U_BPP_PAGO\" = " + array[0] + " WHERE \"DocEntry\" = " + text3 + " AND \"LineId\" = " + array[1]);
+        //                    Global.WriteToFile(text9);
+        //                    recordset.DoQuery(text9);
+        //                }
+
+        //                actualizarNumeroSunat(text2);
+        //                return true;
+        //            }
+        //        }
+
+        //        return false;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Global.WriteToFile(ex.Message.ToString());
+        //        if (SAPMain.oCompany.InTransaction)
+        //        {
+        //            SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
+        //            SAPMain.MensajeError(ex.Message, estado: true);
+        //        }
+
+        //        return false;
+        //    }
+        //}
     }
 }

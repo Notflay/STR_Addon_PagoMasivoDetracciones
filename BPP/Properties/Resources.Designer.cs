@@ -65,10 +65,10 @@ namespace BPP.Properties {
         ///&lt;Application&gt;
         ///	&lt;Menus&gt;
         ///		&lt;action type=&quot;add&quot;&gt;
-        ///			&lt;Menu Checked=&quot;0&quot; Enabled=&quot;1&quot; FatherUID=&quot;MNULOCALI&quot; Position=&quot;6&quot; String=&quot;Configuración Pagos Masivos&quot; Type=&quot;1&quot; UniqueID=&quot;mnuParam&quot; /&gt;
+        ///			&lt;!-- &lt;Menu Checked=&quot;0&quot; Enabled=&quot;1&quot; FatherUID=&quot;MNULOCALI&quot; Position=&quot;6&quot; String=&quot;Configuración Pagos Masivos&quot; Type=&quot;1&quot; UniqueID=&quot;mnuParam&quot; /&gt; --&gt;
         ///			&lt;Menu Checked=&quot;0&quot; Enabled=&quot;1&quot; FatherUID=&quot;MNULOCALI&quot; Position=&quot;8&quot; String=&quot;Pagos Masivos de Proveedores&quot; Type=&quot;1&quot; UniqueID=&quot;mnuPagos&quot; /&gt;
         ///			&lt;Menu Checked=&quot;0&quot; Enabled=&quot;1&quot; FatherUID=&quot;MNULOCALI&quot; Position=&quot;9&quot; String=&quot;Cuenta Destino - Detalle&quot; Type=&quot;1&quot; UniqueID=&quot;mnuCtaDest&quot; /&gt;
-        ///		&lt;/action [resto de la cadena truncado]&quot;;.
+        ///		&lt;/acti [resto de la cadena truncado]&quot;;.
         /// </summary>
         public static string Menu {
             get {

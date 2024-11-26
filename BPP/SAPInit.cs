@@ -70,6 +70,7 @@ namespace BPP
                 SAPMain.cuentaContraPartida = ((dynamic)recordset.Fields.Item("U_BPP_CNTCONTR").Value).ToString();
                 SAPMain.opcionPagoMasivo = Convert.ToInt32((dynamic)recordset.Fields.Item("U_STR_NUMOPERTXT").Value);
                 SAPMain.segmentado = GetSegmento();
+                SAPMain.separador = ((dynamic)recordset.Fields.Item("U_BPP_SEPRDR").Value).ToString();
             }
             catch (Exception)
             {
@@ -128,17 +129,17 @@ namespace BPP
                 SAPbouiCOM.MenuItem logDirInfo = null;
                 MenuCreationParams logFileInfo = null;
                 logFileInfo = (MenuCreationParams)(dynamic)SAPMain.SBO_Application.CreateObject(BoCreatableObjectType.cot_MenuCreationParams);
-                logDirInfo = SAPMain.SBO_Application.Menus.Item("MNULOCALI");
-                fileStream = logDirInfo.SubMenus;
-                if (!fileStream.Exists("mnuParam"))
-                {
-                    logFileInfo.Type = BoMenuType.mt_STRING;
-                    logFileInfo.UniqueID = "mnuParam";
-                    logFileInfo.String = "Configuración Pagos Masivo";
-                    logFileInfo.Position = 6;
-                    logFileInfo.Image = "";
-                    fileStream.AddEx(logFileInfo);
-                }
+                //logDirInfo = SAPMain.SBO_Application.Menus.Item("MNULOCALI");
+                //fileStream = logDirInfo.SubMenus;
+                //if (!fileStream.Exists("mnuParam"))
+                //{
+                //    logFileInfo.Type = BoMenuType.mt_STRING;
+                //    logFileInfo.UniqueID = "mnuParam";
+                //    logFileInfo.String = "Configuración Pagos Masivo";
+                //    logFileInfo.Position = 6;
+                //    logFileInfo.Image = "";
+                //    fileStream.AddEx(logFileInfo);
+                //}
                 logDirInfo = SAPMain.SBO_Application.Menus.Item("MNULOCALI");
                 fileStream = logDirInfo.SubMenus;
                 if (!fileStream.Exists("mnuPagos"))

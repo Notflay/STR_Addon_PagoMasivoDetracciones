@@ -41,6 +41,12 @@ namespace BPP
                     item.Enabled = false;
                     item = oForm.Items.Item("txtCodprov");
                     item.Enabled = false;
+                    item = oForm.Items.Item("cbxFiltro");
+                    item.Enabled = false;
+                    item = oForm.Items.Item("edtFiltval");
+                    item.Enabled = false;
+                    item = oForm.Items.Item("cbxFljCj");
+                    item.Enabled = false;
                     item = oForm.Items.Item("22_U_E");
                     item.Enabled = false;
                     item = oForm.Items.Item("0_U_E");

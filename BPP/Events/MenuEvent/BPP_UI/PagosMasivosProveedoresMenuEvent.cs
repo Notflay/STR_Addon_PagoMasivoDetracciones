@@ -54,22 +54,29 @@ namespace BPP
 
                                     if (oPago.GetByKey(int.Parse(oDocentryPago)))
                                     {
-
-                                        if (oPago.Cancel() != 0)
+                                        if (oPago.Cancelled == BoYesNoEnum.tNO)
                                         {
-                                            if (SAPMain.oCompany.InTransaction)
+                                            if (oPago.Cancel() != 0)
                                             {
-                                                SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
-                                            }
-                                            //oForm.Freeze(false);
+                                                if (SAPMain.oCompany.InTransaction)
+                                                {
+                                                    SAPMain.oCompany.EndTransaction(BoWfTransOpt.wf_RollBack);
+                                                }
+                                                //oForm.Freeze(false);
 
-                                            string error = string.Format("{0}-{1}", SAPMain.oCompany.GetLastErrorCode(), SAPMain.oCompany.GetLastErrorDescription());
-                                            SAPMain.MensajeError(error, true);
-                                            break;
+                                                string error = string.Format("{0}-{1}", SAPMain.oCompany.GetLastErrorCode(), SAPMain.oCompany.GetLastErrorDescription());
+                                                SAPMain.MensajeError(error, true);
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                SAPMain.MensajeAdvertencia("Se cancelo el pago : " + oDocentryPago);
+                                            }
                                         }
                                         else
                                         {
-                                            SAPMain.MensajeAdvertencia("Se cancelo el pago : " + oDocentryPago);
+                                            // El pago ya está cancelado
+                                            SAPMain.MensajeAdvertencia("El pago ya estaba cancelado: " + oDocentryPago);
                                         }
 
                                     }
@@ -87,7 +94,7 @@ namespace BPP
 
                                     oRecordSet.DoQuery(query);
 
-                                    SAPMain.MensajeAdvertencia("Se cancelaron un total de  : " + cont + "Pagos ");
+                                    SAPMain.MensajeAdvertencia("Se cancelaron un total de  : " + cont + " Pagos ");
                                     SAPMain.MensajeExito("Se cancelo la planilla satisfactoriamente.");
                                 }
 
